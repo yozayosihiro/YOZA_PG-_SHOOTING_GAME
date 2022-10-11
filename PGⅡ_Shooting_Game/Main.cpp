@@ -118,7 +118,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		SceneMng.Update(); //シーンの更新処理
 		SceneMng.Draw();   //シーンの描画処理
 
-		/*シーンマネージャー　シーンの変更処理*/
+		/*シーンマネージャー・シーンの変更処理*/
 		if (SceneMng.ChangeScene() == nullptr)
 		{
 
@@ -127,7 +127,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			return 0;	// ソフトの終了
 		}
 
-		ScreenFlip();
+		ScreenFlip();  // 裏画面の内容を表画面に反映
 
 	}
 		
