@@ -12,3 +12,9 @@ enum class GAME_STATE {
 
     EXIT = 99
 };
+
+struct T_Location {
+
+    float x;
+    float y;
+};

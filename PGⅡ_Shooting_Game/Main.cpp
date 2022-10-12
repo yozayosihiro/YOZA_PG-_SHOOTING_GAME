@@ -88,17 +88,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		//}
 
 		/*シーンマネージャー処理*/
-	    //	if (SceneMng.Update() != nullptr)
+	//	if (SceneMng.Update() != nullptr)
 	//	{
-//
+    //
 	//		SceneMng.Update();
 	//		SceneMng.Draw();
-//
+    //
 	//		if (SceneMng.ChangeScene() == nullptr)
 	//		{
-//
+    //
 	//			DxLib::DxLib_End();	// DXライブラリ使用の終了処理
-//
+    //
 	//			return 0;	// ソフトの終了
 	//		}
 	//	}
@@ -106,13 +106,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//	{
 	//		break;
 	//	}
-//
+    //
 	//	ScreenFlip();			// 裏画面の内容を表画面に反映
-//
+    //
 	//}
-//
+    //
 	//DxLib::DxLib_End();	// DXライブラリ使用の終了処理
-//
+    //
 	//return 0;	// ソフトの終了
 
 		SceneMng.Update(); //シーンの更新処理
