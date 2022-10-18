@@ -151,15 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CharaBase.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SpherCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
+    <ClInclude Include="CharaBase.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="GameMain.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SpherCollider.h" />
   </ItemGroup>

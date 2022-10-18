@@ -1,10 +1,5 @@
 #include"GameMain.h"
 
-GameMainScene::GameMainScene()
-{
-	
-}
-
 /*描画以外の更新を実行する*/
 //AbstractScene* GameMainScene::Update() {
 //
@@ -42,18 +37,16 @@ GameMainScene::GameMainScene()
 //	return NextScene;
 //}
 
-
 /*描画以外の更新を実行する*/
 void GameMainScene::Update() {
 
-
-	
+	player->Update();
 }
 
 /*描画に関することを実行する*/
 void GameMainScene::Draw() const {
 
-	
+	player->Draw();
 }
 
 /*シーンの変更処理*/
@@ -65,8 +58,9 @@ AbstractScene* GameMainScene::ChangeScene() {
 /***********************************************
  * ゲームメイン
  ***********************************************/
-void GameMain(void) {
+GameMainScene::GameMainScene()
+{
+	T_Location location = T_Location{ 20,100 };/*プレイヤーの出現位置*/
 
-	
-
+	player = new Player(location);
 }

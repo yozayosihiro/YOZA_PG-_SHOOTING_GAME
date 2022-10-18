@@ -25,6 +25,5 @@ public: /*ŠÖ”İ’è*/
 
 	/*”¼Œa‚Ìæ“¾*/
 	float GetRadius() const; //”¼Œa‚Ìæ“¾
-
 };
 
