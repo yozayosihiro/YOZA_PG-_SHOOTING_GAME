@@ -19,8 +19,8 @@ bool SpherCollider::HitSphere(const SpherCollider* collider) const { //SphereCol
 
 	/*自分から、相手へのベクトルを計算する*/
 	         /*floot型の絶対値*/       /*自分と相手との間のベクトルを計算*/
-	float vectorX = fabsf(this->location.x - collider->GetLocaation().x); //自分のベクトル 引く 相手のベクトル
-	float vectorY = fabsf(this->location.y - collider->GetLocaation().y); //自分のベクトル 引く 相手のベクトル
+	float vectorX = fabsf(this->location.x - collider->GetLocation().x); //自分のベクトル 引く 相手のベクトル
+	float vectorY = fabsf(this->location.y - collider->GetLocation().y); //自分のベクトル 引く 相手のベクトル
 
 	/*ベクトルの大きさを計算*/ 
 	float  VectorLength = (vectorX * vectorX) + (vectorY * vectorY); /*√x2乗 + y2乗*/
@@ -39,7 +39,7 @@ bool SpherCollider::HitSphere(const SpherCollider* collider) const { //SphereCol
 }
 
 /*中心座標の取得*/
-T_Location SpherCollider::GetLocaation() const { //中心座標の取得
+T_Location SpherCollider::GetLocation() const { //中心座標の取得
 
 	return location;
 }

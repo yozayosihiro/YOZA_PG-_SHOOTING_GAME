@@ -2,7 +2,7 @@
 #include"AbstractScene.h"
 #include"SceneManager.h"
 
-//描画以外の更新を実行する
+/*描画以外の更新を実行する*/
 //AbstractScene* SceneManager::Update() {
 
 /*メンバ変数の値を書き換えるのがメンバ*/

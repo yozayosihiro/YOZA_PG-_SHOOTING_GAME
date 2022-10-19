@@ -40,6 +40,19 @@
 /*描画以外の更新を実行する*/
 void GameMainScene::Update() {
 
+	/************** 当たり判定・テスト **************/
+	/*T_Location location = T_Location{ 100,100 };
+
+	Player test = Player(location);
+
+	test.Draw();
+
+	if (test.HitSphere(player))
+	{
+		return;
+	}*/
+	/************************************************/
+
 	player->Update();
 }
 

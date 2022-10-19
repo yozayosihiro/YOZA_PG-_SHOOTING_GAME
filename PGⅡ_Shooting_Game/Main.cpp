@@ -20,12 +20,12 @@ GAME_STATE	g_GameState = GAME_STATE::GAME_TITLE; // ゲームステータス
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow) {
 
-	/* タイトルを test に変更 */
+	/* タイトル*/
 	SetMainWindowText("SHOOTING GAME");
 
-	ChangeWindowMode(TRUE);		// ウィンドウモードで起動
-
-	if (DxLib_Init() == -1) return -1;	// DXライブラリの初期化処理
+	ChangeWindowMode(TRUE);		       // ウィンドウモードで起動
+	SetGraphMode(1280, 720, 32);       // 画面を大きくする
+	if (DxLib_Init() == -1) return -1; // DXライブラリの初期化処理
 
 	/*タイトル画像データの読み込み*/
 	//if ((g_TitleImage = LoadGraph("images/Title.png")) == -1) return -1;
