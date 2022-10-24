@@ -4,6 +4,7 @@
 #include"AbstractScene.h"
 #include"SceneManager.h"
 #include"GameMain.h"
+#include"KeyManager.h"
 
 /***********************************************
  * 変数の宣言
@@ -58,6 +59,24 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		ClearDrawScreen();		// 画面の初期化
 
+		/*キー入力処理確認テスト*/
+		//KeyManager::Update();
+		//if(KeyManager::OnPressed(KEY_INPUT_A)) /*押されたとき*/
+			//if (KeyManager::OnClicked(KEY_INPUT_A)) /*押された瞬間*/
+				//if (KeyManager::OnReleased(KEY_INPUT_A)) /*離した瞬間*/
+		//{
+		//	DrawFormatString(200, 200, 0xffffff, "AAA");
+		//}
+
+		/*マウス入力処理確認テスト*/
+		//KeyManager::Update();
+		//if(KeyManager::OnMousePressed(MOUSE_INPUT_LEFT)) /*押されたとき*/
+			//if (KeyManager::OnMouseClicked(MOUSE_INPUT_LEFT)) /*押された瞬間*/
+				//if (KeyManager::OnMouseReleased(MOUSE_INPUT_LEFT)) /*離した瞬間*/
+		//{
+		//	DrawFormatString(200, 200, 0xffffff, "AAA");
+		//}
+
 		/*switch処理*/
 		//switch (g_GameState) {
 		//	case GAME_STATE::GAME_TITLE:
@@ -87,7 +106,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		//}
 
 		/*シーンマネージャー処理*/
-	//	if (SceneMng.Update() != nullptr)
+	    //	if (SceneMng.Update() != nullptr)
 	//	{
     //
 	//		SceneMng.Update();
@@ -116,6 +135,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		SceneMng.Update(); //シーンの更新処理
 		SceneMng.Draw();   //シーンの描画処理
+		KeyManager::Update(); //マウス・キー入力更新処理
 
 		/*シーンマネージャー・シーンの変更処理*/
 		if (SceneMng.ChangeScene() == nullptr)
