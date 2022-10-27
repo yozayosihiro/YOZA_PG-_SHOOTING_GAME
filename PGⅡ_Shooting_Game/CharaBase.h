@@ -5,7 +5,13 @@
 /*キャラクターのベース*/
 class CharaBase : public SpherCollider
 {
-private:
+//private:
+//
+//	T_Location speed; /*スピード*/
+//
+//	int* image; /**/
+
+protected:
 
 	T_Location speed; /*スピード*/
 

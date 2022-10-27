@@ -21,3 +21,10 @@ void BulletsStraight::Draw()
 {
 	DrawCircle(GetLocation().x, GetLocation().y, GetRadius(), GetColor(0, 255, 0));
 }
+
+bool BulletsStraight::ScreenOut()
+{
+	bool ret = (GetLocation().y + GetRadius() <= 0); /*0‚æ‚è¬‚³‚¢‚Æ‚«E‰~‚ª‘S•”‰æ–ÊŠO‚ÌŽž*/
+
+		return ret;
+}

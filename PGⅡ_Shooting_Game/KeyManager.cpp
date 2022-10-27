@@ -55,7 +55,7 @@ bool KeyManager::OnKeyPressed(int Key)
 /*マウスクリックしてるか押してないか*/
 bool KeyManager::OnMouseClicked(int Key)
 {
-	bool ret = ((NowMouse & Key) && (OldMouse & Key));
+	bool ret = ((NowMouse & Key) && (~OldMouse & Key));
 	return ret;
 }
 

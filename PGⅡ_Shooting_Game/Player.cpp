@@ -21,7 +21,26 @@ void Player::Update()
 	/*LocationをLocationに移動させる処理*/
 	T_Location NewLocation = GetLocation();
 
-	NewLocation.x += 1;
+	if (KeyManager::OnKeyPressed(KEY_INPUT_W)) /*上移動*/
+	{
+		NewLocation.y -= speed.y;
+	}
+
+	if (KeyManager::OnKeyPressed(KEY_INPUT_A)) /*左移動*/
+	{
+		NewLocation.x -= speed.x;
+	}
+
+	if (KeyManager::OnKeyPressed(KEY_INPUT_S)) /*下移動*/
+	{
+		NewLocation.y += speed.y;
+	}
+
+	if (KeyManager::OnKeyPressed(KEY_INPUT_D)) /*右移動*/
+	{
+		NewLocation.x += speed.x;
+	}
+
 	SetLocation(NewLocation);
 
 	int BulleCount;
@@ -33,10 +52,30 @@ void Player::Update()
 			break;
 		}
 
-		bullets[BulleCount]->Update();
+		bullets[BulleCount]->Update(); /*弾のアップデート*/
+
+		/*画面外に行ったら弾を消す*/
+		if(bullets[BulleCount] ->ScreenOut())
+		{
+			delete bullets[BulleCount]; /*弾を消す(デリート)*/
+			bullets[BulleCount] = nullptr; /*nullpointerで上書き*/
+
+			/*配列を前に詰める*/
+			for (BulleCount = 0; BulleCount < 30; BulleCount++)
+			{
+				if (BulleCount != 29) {
+
+					bullets[BulleCount] = bullets[BulleCount + 1];
+				}
+				else
+				{
+					bullets[BulleCount + 1] = nullptr;
+				}
+			}
+		}
 	}
 
-	if (KeyManager::OnMouseClicked(MOUSE_INPUT_LEFT)) /*マウス左クリック*/
+	if (KeyManager::OnMousePressed(MOUSE_INPUT_LEFT)) /*マウス左クリック*/
 	{
 		if (BulleCount < 30 && bullets[BulleCount] == nullptr) /*発射カウント*/
 		{

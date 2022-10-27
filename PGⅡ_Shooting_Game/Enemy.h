@@ -9,6 +9,10 @@ private:
 
 	int point;
 
+public: /*コンストラクタ*/
+
+	Enemy(T_Location location);
+
 public:
 
 	virtual	void Update() override;

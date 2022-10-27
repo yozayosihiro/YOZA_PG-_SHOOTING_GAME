@@ -22,6 +22,9 @@ public:
 
 	virtual void Draw() = 0;
 
+	/*‰æ–Ê’[ˆ—*/
+	virtual bool ScreenOut() = 0;
+
 	int GetDamege();
 };
 

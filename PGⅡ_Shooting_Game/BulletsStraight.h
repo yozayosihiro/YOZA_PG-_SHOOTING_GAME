@@ -13,5 +13,8 @@ public:
 
 	virtual void Draw() override;
 
+	/*‰æ–Ê’[ˆ—*/
+	virtual bool ScreenOut() override;
+
 };
 

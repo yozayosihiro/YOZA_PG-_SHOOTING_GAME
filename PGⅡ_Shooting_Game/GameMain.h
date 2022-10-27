@@ -1,6 +1,7 @@
 #pragma once
 #include"AbstractScene.h"
 #include"Player.h"
+#include"Enemy.h"
 
 /*ゲームメインクラス*/
 class GameMainScene : public AbstractScene {
@@ -8,8 +9,10 @@ class GameMainScene : public AbstractScene {
 private:
 
 /*確保してる箱が多いので一応*/
-	Player* player; 
+	Player* player; /*プレイヤー*/
 
+	Enemy** enemy; /*敵*/
+	 
 public:
 
 	/*コンストラクタ*/
