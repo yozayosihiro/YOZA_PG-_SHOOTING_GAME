@@ -58,18 +58,28 @@ void Player::Update()
 		if(bullets[BulleCount] ->ScreenOut())
 		{
 			delete bullets[BulleCount]; /*弾を消す(デリート)*/
-			bullets[BulleCount] = nullptr; /*nullpointerで上書き*/
+			bullets[BulleCount] = nullptr; /*NULL POINTER(ヌル・ポインター)で上書き*/
 
 			/*配列を前に詰める*/
 			for (BulleCount = 0; BulleCount < 30; BulleCount++)
 			{
-				if (BulleCount != 29) {
+				//if (BulleCount != 29) { /*弾カウントが最後じゃなかったら*/
+				//
+				//	bullets[BulleCount] = bullets[BulleCount + 1]; /*次の弾*/
+				//}
+				//else 
+				//{
+				//	bullets[BulleCount] = nullptr; /*最後だったらnullpointerで上書き*/
+				//
+				//}
 
-					bullets[BulleCount] = bullets[BulleCount + 1];
+				if (BulleCount != 29) { /*弾カウントが最後じゃなかったら*/
+
+					bullets[BulleCount] = bullets[BulleCount + 1]; /*次の弾*/
 				}
-				else
+				else 
 				{
-					bullets[BulleCount + 1] = nullptr;
+					bullets[BulleCount] = nullptr; /*最後だったらNULL POINTER(ヌル・ポインター)で上書き*/
 				}
 			}
 		}
@@ -96,7 +106,6 @@ void Player::Draw()
 		{
 			break;
 		}
-
 		bullets[BulleCount]->Draw();
 	}
 }
