@@ -15,11 +15,14 @@ public: /*コンストラクタ・初期化*/
 
 public:
 
+	/*描画以外の更新を実行する*/
 	void Update() override;
 
+	/*描画に関することを実行する*/
 	void Draw() override;
 
-	void Hit() override;
+	/*当たり判定処理*/
+	void Hit(int damage) override;
 
 	bool LifeCheck();
 

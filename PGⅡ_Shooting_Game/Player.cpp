@@ -55,33 +55,52 @@ void Player::Update()
 		bullets[BulleCount]->Update(); /*弾のアップデート*/
 
 		/*画面外に行ったら弾を消す*/
-		if(bullets[BulleCount] ->ScreenOut())
+		if (bullets[BulleCount]->ScreenOut())
 		{
-			delete bullets[BulleCount]; /*弾を消す(デリート)*/
-			bullets[BulleCount] = nullptr; /*NULL POINTER(ヌル・ポインター)で上書き*/
+			//delete bullets[BulleCount]; /*弾を消す(デリート)*/
+			//bullets[BulleCount] = nullptr; /*NULL POINTER(ヌル・ポインター)で上書き*/
 
-			/*配列を前に詰める*/
-			for (BulleCount = 0; BulleCount < 30; BulleCount++)
-			{
-				//if (BulleCount != 29) { /*弾カウントが最後じゃなかったら*/
-				//
-				//	bullets[BulleCount] = bullets[BulleCount + 1]; /*次の弾*/
-				//}
-				//else 
-				//{
-				//	bullets[BulleCount] = nullptr; /*最後だったらnullpointerで上書き*/
-				//
-				//}
+			DeleteBullet(BulleCount);
+			BulleCount--;
 
-				if (BulleCount != 29) { /*弾カウントが最後じゃなかったら*/
+			/*配列を前に詰める・++ */
+			//for (int i = BulleCount; i < 30 - 1; i++) /*28までループ*/
+			//{
+			//	if (bullets[i + 1] == nullptr)
+			//	{
+			//		break;
+			//	}
+			//	bullets[i] = bullets[i + 1]; /*後ろを前に*//*ループ*/
+			//	bullets[i + 1] = nullptr; /*後ろをNULL POINTER(ヌル・ポインター)で上書き*/
+			//}
+			//
+			//BulleCount--;
 
-					bullets[BulleCount] = bullets[BulleCount + 1]; /*次の弾*/
-				}
-				else 
-				{
-					bullets[BulleCount] = nullptr; /*最後だったらNULL POINTER(ヌル・ポインター)で上書き*/
-				}
-			}
+			/*配列を前に詰める・-- */
+			//for (int i = BulleCount + 1; i < 30; i++) /*2から始まって29で終わる*/
+			//{
+			//	if (bullets[i] == nullptr)
+			//	{
+			//		break;
+			//	}
+			//	bullets[i - 1] = bullets[i]; /*後ろを前に*//*ループ*/
+			//	bullets[i] = nullptr; /*後ろをNULL POINTER(ヌル・ポインター)で上書き*/
+			//}
+
+		    /*配列を前に詰める・未完成品*/
+		    /*配列を前に詰める*/
+		    //for (BulleCount = 0; BulleCount < 30; BulleCount++)
+      //{
+		//if (BulleCount != 29) { /*弾カウントが最後じゃなかったら*/
+		//
+		//	bullets[BulleCount] = bullets[BulleCount + 1]; /*次の弾*/
+		//}
+		//else 
+		//{
+		//	bullets[BulleCount] = nullptr; /*最後だったらnullpointerで上書き*/
+		//
+		//}
+	  //}
 		}
 	}
 
@@ -110,7 +129,8 @@ void Player::Draw()
 	}
 }
 
-void Player::Hit()
+/*当たり判定処理*/
+void Player::Hit(int damage)
 {
 
 }

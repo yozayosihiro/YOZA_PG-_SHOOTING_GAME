@@ -9,3 +9,4 @@ int BulletsBase::GetDamege()
 {
 	return damage;
 }
+

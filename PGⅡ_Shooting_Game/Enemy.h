@@ -15,11 +15,14 @@ public: /*コンストラクタ*/
 
 public:
 
+	/*描画以外の更新を実行する*/
 	virtual	void Update() override;
 
+	/*描画に関することを実行する*/
 	virtual	void Draw() override;
 
-	virtual	void Hit() override;
+	/*当たり判定処理*/
+	virtual	void Hit(int damage) override;
 
 	bool HpCheck();
 

@@ -18,6 +18,7 @@ private:
 
 public:
 
+	//描画以外の更新を実行する
 	static void Update();
 
 	/*キー入力処理*/

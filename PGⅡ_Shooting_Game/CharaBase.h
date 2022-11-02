@@ -25,13 +25,19 @@ protected:/*コンストラクタ*/
 
 public:
 
+	/*描画以外の更新を実行する*/
 	virtual void Update() = 0;
 
+	/*描画に関することを実行する*/
 	virtual void Draw() = 0;
 
-	virtual void Hit() = 0;
+	/*当たり判定処理*/
+	virtual void Hit(int damage) = 0;
 
 	BulletsBase** GetBullets();
+
+	/*弾の削除処理*/
+	void DeleteBullet(int BulletNum);
 };
 
 

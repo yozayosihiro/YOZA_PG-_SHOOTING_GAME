@@ -22,9 +22,18 @@ void Enemy::Draw()
 	DrawCircle(GetLocation().x, GetLocation().y, GetRadius(), GetColor(255, 0, 255));
 }
 
-void Enemy::Hit()
+/*当たり判定処理*/
+void Enemy::Hit(int damage)
 {
+	if (0 < damage) /*クラスで引き渡されてるかどうか*/
+	{
+		hp -= damage; /*エネミーのHPを減らす*/
 
+		if (hp < 0) /*HPが0の時*/
+		{
+			hp = 0;
+		}
+	}
 }
 
 bool Enemy::HpCheck()

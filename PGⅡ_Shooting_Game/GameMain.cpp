@@ -57,6 +57,11 @@ void GameMainScene::Update() {
 
 	int EnemyCount;
 
+	/*ループのための変数*/
+	int BulletCount;
+
+	BulletsBase** bullet = player->GetBullets();
+
 	for (EnemyCount = 0; EnemyCount < 10; EnemyCount++) /*敵が10体に増えるまで*/
 	{
 		if (enemy[EnemyCount] == nullptr)
@@ -64,7 +69,35 @@ void GameMainScene::Update() {
 			break;
 		}
 
+		/*エネミーの更新*/
 		enemy[EnemyCount]->Update();
+
+		for (BulletCount = 0; BulletCount < 30; BulletCount++) /*弾30発*/
+		{
+			if (bullet[BulletCount] == nullptr)
+			{
+				break;
+			}
+
+			/*当たり判定*/
+			if (enemy[EnemyCount]->HitSphere(bullet[BulletCount])) /*エネミーにプレイヤーの弾がヒットしている*/
+			{
+
+				/*エネミーにダメージを与える*/
+				enemy[EnemyCount]->Hit(bullet[BulletCount]->GetDamege());/*色々と呼び出している*/
+
+				/*弾を削除*/
+				player->DeleteBullet(BulletCount);
+				BulletCount--;
+
+				/*エネミーのHPが0以下だったら、エネミーを削除*/
+				if (enemy[EnemyCount]->HpCheck())
+				{
+					/*エネミーの削除*/
+
+				}
+			}
+		}
 	}
 }
 
