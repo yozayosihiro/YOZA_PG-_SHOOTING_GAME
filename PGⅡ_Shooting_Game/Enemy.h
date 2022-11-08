@@ -13,6 +13,11 @@ public: /*コンストラクタ*/
 
 	Enemy(T_Location location);
 
+	/*敵(ポインタ配列)*/
+	//Enemy** enemy; /*(ポインタ配列)*/
+	//
+	
+
 public:
 
 	/*描画以外の更新を実行する*/
@@ -27,5 +32,9 @@ public:
 	bool HpCheck();
 
 	int GetPoint();
+
+	/*エネミーの削除処理*/
+	//void DeleteEnemy(int EnemyNum);
+	//
 };
 

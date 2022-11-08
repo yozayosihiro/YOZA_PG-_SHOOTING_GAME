@@ -15,7 +15,7 @@ Player::Player(T_Location location) : CharaBase(location, T_Location{ 2,2 }, 10.
 	}
 }
 
-/*描画以外の更新を実行する*/
+/*プレイヤー：描画以外の更新を実行する*/
 void Player::Update()
 {
 	/*LocationをLocationに移動させる処理*/
@@ -113,7 +113,7 @@ void Player::Update()
 	}
 }
 
-/*描画に関することを実行する*/
+/*プレイヤー：描画に関することを実行する*/
 void Player::Draw()
 {
 	DrawCircle(GetLocation().x, GetLocation().y, GetRadius(), GetColor(255, 0, 0));
@@ -129,12 +129,13 @@ void Player::Draw()
 	}
 }
 
-/*当たり判定処理*/
+/*プレイヤー：当たり判定処理*/
 void Player::Hit(int damage)
 {
 
 }
 
+/*プレイヤー：HP処理*/
 bool Player::LifeCheck()
 {
 	/*HP = 0 かどうか?*/
@@ -143,7 +144,17 @@ bool Player::LifeCheck()
 	return ret;
 }
 
+/*プレイヤー：スコアを返す*/
 int Player::GetScore()
 {
 	return score;
+}
+
+/*プレイヤー：スコア加算*/
+void Player::AddScore(int score)
+{
+	if (0 <= score) /*スコアが0より下にならないように*/
+	{
+		this->score += score;
+	}
 }

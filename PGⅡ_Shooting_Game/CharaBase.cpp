@@ -40,3 +40,9 @@ void CharaBase::DeleteBullet(int BulletNum)
 		bullets[i] = nullptr; /*後ろをNULL POINTER(ヌル・ポインター)で上書き*/
 	}
 }
+
+/*エネミーの削除処理*/
+//void DeleteEnemy(int EnemyNum)
+//{
+//	
+//}

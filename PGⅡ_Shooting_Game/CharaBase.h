@@ -1,7 +1,6 @@
 #pragma once
 #include "SpherCollider.h"
 #include"BulletsBase.h"
-
 /*キャラクターのベース*/
 class CharaBase : public SpherCollider
 {
@@ -17,27 +16,35 @@ protected:
 
 	int* image; /**/
 
-protected:/*コンストラクタ*/
+protected:/*キャラ：コンストラクタ*/
 
 	BulletsBase** bullets; /*(ポインタ配列)*/
+
+	/*敵(ポインタ配列)*/
+	//Enemy** enemy; /*(ポインタ配列)*/
+	//
 
 	CharaBase(T_Location location, T_Location speed, float radius);
 
 public:
 
-	/*描画以外の更新を実行する*/
+	/*キャラ：描画以外の更新を実行する*/
 	virtual void Update() = 0;
 
-	/*描画に関することを実行する*/
+	/*キャラ：描画に関することを実行する*/
 	virtual void Draw() = 0;
 
-	/*当たり判定処理*/
+	/*キャラ：当たり判定処理*/
 	virtual void Hit(int damage) = 0;
 
 	BulletsBase** GetBullets();
 
-	/*弾の削除処理*/
+	/*キャラ：弾の削除処理*/
 	void DeleteBullet(int BulletNum);
+
+	/*キャラ：エネミーの削除処理*/
+	//void DeleteEnemy(int EnemyNum);
+	//
 };
 
 

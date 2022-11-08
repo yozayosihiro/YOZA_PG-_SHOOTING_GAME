@@ -15,17 +15,22 @@ public: /*コンストラクタ・初期化*/
 
 public:
 
-	/*描画以外の更新を実行する*/
+	/*プレイヤー：描画以外の更新を実行する*/
 	void Update() override;
 
-	/*描画に関することを実行する*/
+	/*プレイヤー：描画に関することを実行する*/
 	void Draw() override;
 
-	/*当たり判定処理*/
+	/*プレイヤー：当たり判定処理*/
 	void Hit(int damage) override;
 
+	/*プレイヤー：HP処理*/
 	bool LifeCheck();
 
+	/*プレイヤー：スコアを返す*/
 	int GetScore();
+
+	/*プレイヤー：スコア加算*/
+	void AddScore(int score);
 };
 

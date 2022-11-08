@@ -48,3 +48,9 @@ int Enemy::GetPoint()
 {
 	return point; /*メンバ変数のポイントを返す*/
 }
+
+/*エネミーの削除処理*/
+//void DeleteEnemy(int EnemyNum)
+//{
+//	
+//}

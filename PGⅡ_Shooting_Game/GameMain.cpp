@@ -37,7 +37,7 @@
 //	return NextScene;
 //}
 
-/*描画以外の更新を実行する*/
+/*ゲームメイン：描画以外の更新を実行する*/
 void GameMainScene::Update() {
 
 	/************** 当たり判定・テスト **************/
@@ -93,15 +93,50 @@ void GameMainScene::Update() {
 				/*エネミーのHPが0以下だったら、エネミーを削除*/
 				if (enemy[EnemyCount]->HpCheck())
 				{
+					/*スコア加算*/
+					player->AddScore(enemy[EnemyCount]->GetPoint());
+					
 					/*エネミーの削除*/
+					//player->DeleteBullet(EnemyCount);
+					//EnemyCount--;
 
+					/*エネミーの削除*/
+					delete enemy[EnemyCount]; /*敵を消す(デリート)*/
+					enemy[EnemyCount] = nullptr; /*NULL POINTER(ヌル・ポインター)で上書き*/
+
+					/*配列を前に詰める・++ */
+					//for (int i = EnemyCount; i < 30 - 1; i++) /*28までループ*/
+					//{
+					//	if (enemy[i + 1] == nullptr)
+					//	{
+					//		break;
+					//	}
+					//	enemy[i] = enemy[i + 1]; /*後ろを前に*//*ループ*/
+					//	enemy[i + 1] = nullptr; /*後ろをNULL POINTER(ヌル・ポインター)で上書き*/
+					//}
+					//
+					//EnemyCount--;
+
+					/*配列を前に詰める・-- */
+					for (int i = EnemyCount + 1; i < 10; i++) /*2から始まって29で終わる*/
+					{
+						if (enemy[i] == nullptr)
+						{
+							break;
+						}
+						enemy[i - 1] = enemy[i]; /*後ろを前に*//*ループ*/
+						enemy[i] = nullptr; /*後ろをNULL POINTER(ヌル・ポインター)で上書き*/
+					}
+
+					EnemyCount--;  /*EnemyCountを0にする*/
+					break;        /*for文を抜ける*/
 				}
 			}
 		}
 	}
 }
 
-/*描画に関することを実行する*/
+/*ゲームメイン：描画に関することを実行する*/
 void GameMainScene::Draw() const {
 
 	player->Draw();
@@ -117,7 +152,7 @@ void GameMainScene::Draw() const {
 	}
 }
 
-/*シーンの変更処理*/
+/*ゲームメイン：シーンの変更処理*/
 AbstractScene* GameMainScene::ChangeScene() {
 
 	return this;
