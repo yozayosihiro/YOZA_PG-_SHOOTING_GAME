@@ -1,4 +1,5 @@
 #include"GameMain.h"
+#include"RecoveryItem.h"
 
 /*描画以外の更新を実行する*/
 //AbstractScene* GameMainScene::Update() {
@@ -60,8 +61,17 @@ void GameMainScene::Update() {
 	/*ループのための変数*/
 	int BulletCount;
 
-	BulletsBase** bullet = player->GetBullets();
+	/*アイテムUpdate処理*/
+	for (int i = 0; i < 10; i++)
+	{
+		if (item[i] == nullptr)
+		{
+			break;
+		}
+		item[i]->Update();
+	}
 
+	BulletsBase** bullet = player->GetBullets();
 	for (EnemyCount = 0; EnemyCount < 10; EnemyCount++) /*敵が10体に増えるまで*/
 	{
 		if (enemy[EnemyCount] == nullptr)
@@ -71,6 +81,16 @@ void GameMainScene::Update() {
 
 		/*エネミーの更新*/
 		enemy[EnemyCount]->Update();
+
+		/*for (int i = 0; i < 10; i++)
+		{
+			if (item[i] == nullptr)
+			{
+				break;
+			}
+
+			item[i]->Update();
+		}*/
 
 		for (BulletCount = 0; BulletCount < 30; BulletCount++) /*弾30発*/
 		{
@@ -93,6 +113,15 @@ void GameMainScene::Update() {
 				/*エネミーのHPが0以下だったら、エネミーを削除*/
 				if (enemy[EnemyCount]->HpCheck())
 				{
+					for (int i = 0; i < 10; i++)
+					{
+						if (item[i] == nullptr) /*敵からアイテム*/
+						{
+							item[i] = new RecoveryItem(enemy[EnemyCount]->GetLocation());
+							break;
+						}
+					}
+
 					/*スコア加算*/
 					player->AddScore(enemy[EnemyCount]->GetPoint());
 					
@@ -134,6 +163,32 @@ void GameMainScene::Update() {
 			}
 		}
 	}
+		for (int ItemCount = 0; ItemCount < 10; ItemCount++)
+		{
+			if (item[ItemCount] == nullptr)
+			{
+				break;
+			}
+			if (item[ItemCount]->HitSphere(player))
+			{
+				/*エネミーの削除*/
+				delete item[ItemCount]; /*敵を消す(デリート)*/
+				item[ItemCount] = nullptr; /*NULL POINTER(ヌル・ポインター)で上書き*/
+
+				/*配列を前に詰める・-- */
+				for (int i = ItemCount + 1; i < 10; i++) /*2から始まって29で終わる*/
+				{
+					if (item[i] == nullptr)
+					{
+						break;
+					}
+					item[i - 1] = item[i]; /*後ろを前に*//*ループ*/
+					item[i] = nullptr; /*後ろをNULL POINTER(ヌル・ポインター)で上書き*/
+				}
+
+				ItemCount--;  /*EnemyCountを0にする*/
+			}
+		}
 }
 
 /*ゲームメイン：描画に関することを実行する*/
@@ -149,6 +204,16 @@ void GameMainScene::Draw() const {
 		}
 
 		enemy[EnemyCount]->Draw();
+	}
+
+	/*アイテムDraw処理*/
+	for (int i = 0; i < 10; i++)
+	{
+		if (item[i] == nullptr)
+		{
+			break;
+		}
+		item[i]->Draw();
 	}
 }
 
@@ -174,5 +239,14 @@ GameMainScene::GameMainScene()
 		enemy[i] = nullptr; /*nullpointerで初期化*/
 	}
 
+	/*アイテム初期化*/
+	/*newで領域確保*/
 	enemy[0] = new Enemy(T_Location{200,0}); /*敵を一体だけ作る*/
+
+	item = new ItemBase * [10];
+
+	for (int i = 0; i < 10; i++)
+	{
+		item[i] = nullptr; /*初期化*/
+	}
 }

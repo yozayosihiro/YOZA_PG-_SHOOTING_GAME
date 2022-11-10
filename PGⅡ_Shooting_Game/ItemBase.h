@@ -6,13 +6,18 @@ class ItemBase : public SpherCollider
 {
 private:
 
+	/*アイテム：種類*/
 	enum_ItemType type;
 
 protected:
 
+	/*アイテム：スピード*/
 	T_Location speed;
 
-public:
+public: /*アイテム：コンストラクタ*/
+
+	/*アイテム：コンストラクタ*/
+	ItemBase(T_Location location, float radius, enum_ItemType type, T_Location speed);
 
 public:
 

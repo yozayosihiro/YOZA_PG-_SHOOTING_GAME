@@ -11,6 +11,11 @@ protected:
 
 public:
 
+	/*回復アイテム：コンストラクタ*/
+	RecoveryItem(T_Location location);
+	//RecoveryItem(T_Location location, float radius, enum_ItemType type, T_Location speed); /*細かくしたいなら*/
+	//
+
 public:
 
 	/*回復アイテム：描画以外の更新を実行する*/

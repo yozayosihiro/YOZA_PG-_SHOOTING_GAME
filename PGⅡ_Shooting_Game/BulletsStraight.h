@@ -1,5 +1,6 @@
 #pragma once
 #include "BulletsBase.h"
+
 class BulletsStraight : public BulletsBase
 {
 

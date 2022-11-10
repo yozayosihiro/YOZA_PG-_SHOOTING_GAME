@@ -2,6 +2,7 @@
 #include"AbstractScene.h"
 #include"Player.h"
 #include"Enemy.h"
+#include"ItemBase.h"
 
 /*ゲームメインクラス*/
 class GameMainScene : public AbstractScene {
@@ -12,6 +13,8 @@ private:
 	Player* player; /*プレイヤー*/
 
 	Enemy** enemy; /*敵*/
+
+	ItemBase** item; /*アイテム*/
 	 
 public:
 

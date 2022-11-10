@@ -12,7 +12,7 @@ void Enemy::Update()
 	/*LocationをLocationに移動させる処理*/
 	T_Location NewLocation = GetLocation();
 
-	NewLocation.y += 0.5;
+	NewLocation.y += speed.y; /*エネミーはスピードの値をみて移動*/
 	SetLocation(NewLocation);
 }
 

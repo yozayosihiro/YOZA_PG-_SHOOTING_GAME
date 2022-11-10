@@ -116,6 +116,16 @@ void Player::Update()
 /*プレイヤー：描画に関することを実行する*/
 void Player::Draw()
 {
+/************************************************************************************************/
+#define _DEBUG_MODE_PLAYE /*デバックモード*/
+
+#ifdef _DEBUG_MODE_PLAYE /*デバックモード*/
+
+	DrawFormatString(10, 10, GetColor(255, 255, 255), "life = %d",life); /*プレイヤーのHP表示*/
+
+#endif // DEBUG /*デバックモード*/
+/************************************************************************************************/
+
 	DrawCircle(GetLocation().x, GetLocation().y, GetRadius(), GetColor(255, 0, 0));
 
 	/*弾丸の描画*/

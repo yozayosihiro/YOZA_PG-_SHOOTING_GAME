@@ -5,7 +5,6 @@ BulletsBase::BulletsBase(T_Location location, T_Location speed, float radius, in
 
 }
 
-
 /*弾丸：ダメージ処理*/
 int BulletsBase::GetDamege()
 {
