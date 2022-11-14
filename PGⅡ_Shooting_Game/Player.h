@@ -21,8 +21,11 @@ public:
 	/*プレイヤー：描画に関することを実行する*/
 	void Draw() override;
 
-	/*プレイヤー：当たり判定処理*/
+	/*プレイヤー：攻撃当たり判定処理*/
 	void Hit(int damage) override;
+
+	/*プレイヤー：アイテムへの内容処理*/
+	void Hit(class ItemBase* item);
 
 	/*プレイヤー：HP処理*/
 	bool LifeCheck();

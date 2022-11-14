@@ -163,16 +163,21 @@ void GameMainScene::Update() {
 			}
 		}
 	}
+		/*アイテムの削除処理*/
 		for (int ItemCount = 0; ItemCount < 10; ItemCount++)
 		{
 			if (item[ItemCount] == nullptr)
 			{
 				break;
 			}
-			if (item[ItemCount]->HitSphere(player))
+			/*アイテムの削除処理*/
+			if (item[ItemCount]->HitSphere(player)) /*アイテムとプレイヤーの当たり判定*/
 			{
-				/*エネミーの削除*/
-				delete item[ItemCount]; /*敵を消す(デリート)*/
+				/*回復処理*/
+				player->Hit(item[ItemCount]);
+
+				/*アイテムの削除*/
+				delete item[ItemCount]; /*アイテムを消す(デリート)*/
 				item[ItemCount] = nullptr; /*NULL POINTER(ヌル・ポインター)で上書き*/
 
 				/*配列を前に詰める・-- */
@@ -186,7 +191,7 @@ void GameMainScene::Update() {
 					item[i] = nullptr; /*後ろをNULL POINTER(ヌル・ポインター)で上書き*/
 				}
 
-				ItemCount--;  /*EnemyCountを0にする*/
+				ItemCount--;  /*ItemCountを0にする*/
 			}
 		}
 }

@@ -1,12 +1,12 @@
 #pragma once
 #include "BulletsBase.h"
 
-class BulletsStraight : public BulletsBase
+class EnemyBulletsStraight : public BulletsBase
 {
 
 public:/*率直な弾丸：コンストラクタ*/
 
-	BulletsStraight(T_Location location, T_Location speed);
+	EnemyBulletsStraight(T_Location location);
 
 public:
 

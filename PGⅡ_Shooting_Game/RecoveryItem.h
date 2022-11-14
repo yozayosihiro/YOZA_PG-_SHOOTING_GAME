@@ -5,7 +5,7 @@ class RecoveryItem : public ItemBase
 {
 private:
 
-	int volume_item; /*回復アイテム量*/
+	int volume_item; /*アイテム回復量*/
 
 protected:
 

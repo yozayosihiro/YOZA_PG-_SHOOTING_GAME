@@ -6,7 +6,9 @@ class SpherCollider
 {
 private: /*変数設定*/
 
-	T_Location location; //Location(中心座標)
+	/*Location(位置：中心座標)*/
+
+	T_Location location; //位置：中心座標
 	
 	float radius;  //半径
 

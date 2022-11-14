@@ -155,12 +155,13 @@
     <ClCompile Include="BulletsStraight.cpp" />
     <ClCompile Include="CharaBase.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyBulletsStraight_Non.cpp" />
     <ClCompile Include="enum_ItemType.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MouseManager.cpp" />
+    <ClCompile Include="MouseManager_Non.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RecoveryItem.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="CharaBase.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyBulletsStraight.h" />
     <ClInclude Include="enum_ItemType.h" />
     <ClInclude Include="GameMain.h" />
     <ClInclude Include="ItemBase.h" />

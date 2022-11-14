@@ -1,13 +1,15 @@
+#include "EnemyBulletsStraight.h"
 #include"DxLib.h"
-#include "BulletsStraight.h"
-                                     /*※1：位置*/    /*※2：スピード*/                /*※1*/ /*※2*/
-BulletsStraight::BulletsStraight(T_Location location, T_Location speed) : BulletsBase(location, speed, 5.0f, 3)
+
+EnemyBulletsStraight::EnemyBulletsStraight(T_Location location) : BulletsBase(location, T_Location{ 0, - 2 }, 5.0f, 3)
 {
 
 }
 
+
+
 /*率直な弾丸：描画以外の更新を実行する*/
-void BulletsStraight::Update()
+void EnemyBulletsStraight::Update()
 {
 	T_Location NewLocation = GetLocation();
 
@@ -17,15 +19,15 @@ void BulletsStraight::Update()
 }
 
 /*率直な弾丸：描画に関することを実行する*/
-void BulletsStraight::Draw()
+void EnemyBulletsStraight::Draw()
 {
 	DrawCircle(GetLocation().x, GetLocation().y, GetRadius(), GetColor(0, 255, 0));
 }
 
 /*率直な弾丸：画面外処理*/
-bool BulletsStraight::ScreenOut()
+bool EnemyBulletsStraight::ScreenOut()
 {
 	bool ret = (GetLocation().y + GetRadius() <= 0); /*0より小さいとき・円が全部画面外の時*/
 
-		return ret;
+	return ret;
 }

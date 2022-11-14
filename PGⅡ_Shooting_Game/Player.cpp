@@ -2,6 +2,7 @@
 #include "Player.h"
 #include"BulletsStraight.h"
 #include"KeyManager.h"
+#include"RecoveryItem.h"
 
 Player::Player(T_Location location) : CharaBase(location, T_Location{ 2,2 }, 10.f), score(0), life(10)
 {
@@ -57,6 +58,7 @@ void Player::Update()
 		/*画面外に行ったら弾を消す*/
 		if (bullets[BulleCount]->ScreenOut())
 		{
+			/*弾丸の消去*/
 			//delete bullets[BulleCount]; /*弾を消す(デリート)*/
 			//bullets[BulleCount] = nullptr; /*NULL POINTER(ヌル・ポインター)で上書き*/
 
@@ -104,11 +106,12 @@ void Player::Update()
 		}
 	}
 
+	/*弾丸の発射*/
 	if (KeyManager::OnMousePressed(MOUSE_INPUT_LEFT)) /*マウス左クリック*/
 	{
 		if (BulleCount < 30 && bullets[BulleCount] == nullptr) /*発射カウント*/
 		{
-			bullets[BulleCount] = new BulletsStraight(GetLocation()); /*BulletsStraightを作成*/
+			bullets[BulleCount] = new BulletsStraight(GetLocation(), T_Location{0,2}); /*BulletsStraightを作成*/
 		}
 	}
 }
@@ -139,10 +142,28 @@ void Player::Draw()
 	}
 }
 
-/*プレイヤー：当たり判定処理*/
+/*プレイヤー：攻撃当たり判定処理*/
 void Player::Hit(int damage)
 {
 
+}
+
+/*プレイヤー：アイテムへの内容処理*/
+void Player::Hit(class ItemBase* item)
+{
+	switch (item->GetType())
+	{
+	case enum_ItemType::HEAL:
+	{
+		RecoveryItem* recoveryitem = dynamic_cast<RecoveryItem*>(item); /*Dynamicキャストする*/
+
+		life += recoveryitem->GetVolumeItem(); /*プレイヤーのHPにプラスにたす*/
+		break;
+	}/*変数の寿命を保つため{}を付ける*/
+
+	default:
+		break;
+	}
 }
 
 /*プレイヤー：HP処理*/

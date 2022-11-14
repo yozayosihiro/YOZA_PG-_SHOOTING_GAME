@@ -1,7 +1,7 @@
 #include "RecoveryItem.h"
 #include"DxLib.h"
 
-/*回復アイテム：コンストラクタ*/                                                                        /*speed値*/
+/*回復アイテム：コンストラクタ*/                                                                      /*speed値*/ /*回復量(+2)*/
 RecoveryItem::RecoveryItem(T_Location location) : ItemBase(location, 5.f, enum_ItemType::HEAL, T_Location{ 0,1 }), volume_item(2)
 {
 
