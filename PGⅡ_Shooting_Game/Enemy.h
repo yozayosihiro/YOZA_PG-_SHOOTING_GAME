@@ -5,9 +5,9 @@ class Enemy : public CharaBase
 {
 private:
 
-	int hp;
+	int hp; /*敵：HP*/
 
-	int point;
+	int point; /*敵：ポインタ取得*/
 
 public: /*コンストラクタ*/
 
@@ -20,17 +20,19 @@ public: /*コンストラクタ*/
 
 public:
 
-	/*描画以外の更新を実行する*/
+	/*敵：描画以外の更新を実行する*/
 	virtual	void Update() override;
 
-	/*描画に関することを実行する*/
+	/*敵：描画に関することを実行する*/
 	virtual	void Draw() override;
 
-	/*当たり判定処理*/
+	/*敵：当たり判定処理*/
 	virtual	void Hit(int damage) override;
 
+	/*敵：HP判定処理*/
 	bool HpCheck();
 
+	/*敵：ポインタ取得処理*/
 	int GetPoint();
 
 	/*エネミーの削除処理*/

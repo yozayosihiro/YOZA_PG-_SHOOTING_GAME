@@ -106,7 +106,7 @@ void Player::Update()
 		}
 	}
 
-	/*弾丸の発射*/
+	/*プレイヤー：弾丸の発射*/
 	if (KeyManager::OnMousePressed(MOUSE_INPUT_LEFT)) /*マウス左クリック*/
 	{
 		if (BulleCount < 30 && bullets[BulleCount] == nullptr) /*発射カウント*/
@@ -145,7 +145,15 @@ void Player::Draw()
 /*プレイヤー：攻撃当たり判定処理*/
 void Player::Hit(int damage)
 {
+	if (0 < damage) /*クラスで引き渡されてるかどうか*/
+	{
+		life -= damage; /*プレイヤーのHPを減らす*/
 
+		if (life < 0) /*HPが0の時*/
+		{
+			life = 0;
+		}
+	}
 }
 
 /*プレイヤー：アイテムへの内容処理*/

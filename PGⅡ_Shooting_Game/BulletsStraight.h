@@ -6,7 +6,7 @@ class BulletsStraight : public BulletsBase
 
 public:/*率直な弾丸：コンストラクタ*/
 
-	BulletsStraight(T_Location location, T_Location speed);
+	BulletsStraight(T_Location location, T_Location speed /*= T_Location{0.-2}*/);
 
 public:
 

@@ -16,7 +16,7 @@ Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 0,0.5 }, 20.
 	}
 }
 
-/*描画以外の更新を実行する*/
+/*敵：描画以外の更新を実行する*/
 void Enemy::Update()
 {
 	/*LocationをLocationに移動させる処理*/
@@ -87,20 +87,20 @@ void Enemy::Update()
 		}
 	}
 
-	/*弾丸の発射*/
-	if (KeyManager::OnMousePressed(MOUSE_INPUT_LEFT)) /*マウス左クリック*/
+	/*敵：弾丸の発射*/
+	if (1) /*自動で*/
 	{
 		if (BulleCount < 30 && bullets[BulleCount] == nullptr) /*発射カウント*/
 		{
 			                                                   /*BulletsStraightの引数*/
-			bullets[BulleCount] = new BulletsStraight(GetLocation(),T_Location {0,-2}); /*BulletsStraightを作成*/
+			bullets[BulleCount] = new BulletsStraight(GetLocation(),T_Location {0,-4}); /*BulletsStraightを作成*/
 			//bullets[BulleCount] = new EnemyBulletsStraight(GetLocation()); /*強引BulletsStraightを作成*/
 			//
 		}
 	}
 }
 
-/*描画に関することを実行する*/
+/*敵：描画に関することを実行する*/
 void Enemy::Draw()
 {
 	DrawCircle(GetLocation().x, GetLocation().y, GetRadius(), GetColor(255, 0, 255));
@@ -116,7 +116,7 @@ void Enemy::Draw()
 	}
 }
 
-/*当たり判定処理*/
+/*敵：当たり判定処理*/
 void Enemy::Hit(int damage)
 {
 	if (0 < damage) /*クラスで引き渡されてるかどうか*/
@@ -130,6 +130,7 @@ void Enemy::Hit(int damage)
 	}
 }
 
+/*敵：HP判定処理*/
 bool Enemy::HpCheck()
 {
 	/*HP = 0 かどうか?*/
@@ -138,6 +139,7 @@ bool Enemy::HpCheck()
 		return ret;
 }
 
+/*敵：ポインタ取得処理*/
 int Enemy::GetPoint()
 {
 	return point; /*メンバ変数のポイントを返す*/

@@ -12,6 +12,7 @@ void BulletsStraight::Update()
 	T_Location NewLocation = GetLocation();
 
 	NewLocation.y -= speed.y;
+	/*NewLocation.y += speed.y;*/
 
 	SetLocation(NewLocation);
 }
@@ -25,7 +26,7 @@ void BulletsStraight::Draw()
 /*率直な弾丸：画面外処理*/
 bool BulletsStraight::ScreenOut()
 {
-	bool ret = (GetLocation().y + GetRadius() <= 0); /*0より小さいとき・円が全部画面外の時*/
+	bool ret = (GetLocation().y + GetRadius() <= 0 || GetLocation().y + GetRadius() >= 720); /*0より小さいとき or 720より大きいとき・円が全部画面外の時*/
 
 		return ret;
 }
