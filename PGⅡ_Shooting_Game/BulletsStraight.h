@@ -18,6 +18,5 @@ public:
 
 	/*—¦’¼‚È’eŠÛF‰æ–Ê’[ˆ—*/
 	virtual bool ScreenOut() override;
-
 };
 

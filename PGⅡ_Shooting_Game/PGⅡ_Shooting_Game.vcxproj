@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BulletsBase.cpp" />
+    <ClCompile Include="BulletsRotation.cpp" />
     <ClCompile Include="BulletsStraight.cpp" />
     <ClCompile Include="CharaBase.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -170,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
     <ClInclude Include="BulletsBase.h" />
+    <ClInclude Include="BulletsRotation.h" />
     <ClInclude Include="BulletsStraight.h" />
     <ClInclude Include="CharaBase.h" />
     <ClInclude Include="Common.h" />

@@ -145,11 +145,11 @@ void Player::Draw()
 /*プレイヤー：攻撃当たり判定処理*/
 void Player::Hit(int damage)
 {
-	if (0 < damage) /*クラスで引き渡されてるかどうか*/
+	if (0 <= damage) /*クラスで引き渡されてるかどうか*/
 	{
 		life -= damage; /*プレイヤーのHPを減らす*/
 
-		if (life < 0) /*HPが0の時*/
+		if (life <= 0) /*HPが0の時*/
 		{
 			life = 0;
 		}

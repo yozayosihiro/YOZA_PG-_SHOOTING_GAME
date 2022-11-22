@@ -82,8 +82,8 @@ void GameMainScene::Update() {
 		/*エネミーの更新*/
 		enemy[EnemyCount]->Update();
 
-		/*敵の弾とプレイヤーの当たり判定*/
-	    /*敵の弾を取ってくる
+	   /*敵の弾とプレイヤーの当たり判定　完成*/
+	   /*敵の弾を取ってくる
 	   for(弾をループで参照)
 	   {
 			if(敵の弾とプレイヤーの当たり判定)
@@ -94,43 +94,40 @@ void GameMainScene::Update() {
 			}
 	   }*/
 
-	    /*敵の弾とプレイヤーの当たり判定*/
-		/*敵の弾を取ってくる*/
-		BulletsBase** EnemyBullet = enemy[EnemyCount]->GetBullets();
+		/*敵の弾を取ってくる 完成*/
+		//BulletsBase** EnemyBullet = enemy[EnemyCount]->GetBullets();
 
-		/*弾をループで参照*/
-		for (int BulletCount = 0; BulletCount < 30; BulletCount++) /*弾30発*/
-		{
-			if (EnemyBullet[BulletCount] == nullptr)
-			{
-				break;
-			}
+		/*弾をループで参照 完成*/
+		//for (int BulletCount = 0; BulletCount < 30; BulletCount++) /*弾30発*/
+		//{
+		//	if (EnemyBullet[BulletCount] == nullptr)
+		//	{
+		//		break;
+		//	}
+		//	 /*敵の弾とプレイヤーの当たり判定*/
+		//	if (player->HitSphere(EnemyBullet[BulletCount])) /*エネミーにプレイヤーの弾がヒットしている*/
+		//	{
+		//		/*プレイヤーにダメージを与える*/
+		//		player->Hit(EnemyBullet[BulletCount]->GetDamege());/*色々と呼び出している*/
+		//
+		//		/*敵の弾を削除する*/
+		//		enemy[EnemyCount]->DeleteBullet(BulletCount);
+		//
+		//		BulletCount--;
+		//
+		//		/*プレイヤーの削除*/
+		//		//delete player; /*敵を消す(デリート)*/
+		//	}
+		//}
 
-			/*敵の弾とプレイヤーの当たり判定*/
-			if (player->HitSphere(EnemyBullet[BulletCount])) /*エネミーにプレイヤーの弾がヒットしている*/
-			{
-				/*プレイヤーにダメージを与える*/
-				player->Hit(EnemyBullet[BulletCount]->GetDamege());/*色々と呼び出している*/
-
-				/*敵の弾を削除する*/
-				enemy[EnemyCount]->DeleteBullet(BulletCount);
-
-				BulletCount--;
-
-				/*プレイヤーの削除*/
-				//delete player; /*敵を消す(デリート)*/
-			}
-		}
-
-		/*for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			if (item[i] == nullptr)
 			{
 				break;
 			}
-
 			item[i]->Update();
-		}*/
+		}
 
 		for (BulletCount = 0; BulletCount < 30; BulletCount++) /*弾30発*/
 		{
@@ -203,8 +200,8 @@ void GameMainScene::Update() {
 			}
 		}
 	}
-		/*敵の弾とプレイヤーの当たり判定*/
-		/*敵の弾を取ってくる
+	   /*敵の弾とプレイヤーの当たり判定 完成(見本)*/
+	   /*敵の弾を取ってくる
 	   for(弾をループで参照)
 	   {
 			if(敵の弾とプレイヤーの当たり判定)
@@ -215,23 +212,31 @@ void GameMainScene::Update() {
 			}
 	   }*/
 
-	   /*敵の弾とプレイヤーの当たり判定 未完成*/
-		//for (BulletCount = 0; BulletCount < 30; BulletCount++) /*弾30発*/
-		//{
-		//	if (bullet[BulletCount] == nullptr)
-		//	{
-		//		break;
-		//	}
-		//	/*当たり判定*/
-		//	if (player->HitSphere(bullet[BulletCount])) /*エネミーにプレイヤーの弾がヒットしている*/
-		//	{
-		//		/*エネミーにダメージを与える*/
-		//		player->Hit(bullet[BulletCount]->GetDamege());/*色々と呼び出している*/
-		//
-		//		/*エネミーの削除*/
-		//		delete player; /*敵を消す(デリート)*/
-		//	}
-		//}
+	    /*弾をループで参照 完成(見本)*/
+		for (EnemyCount = 0; EnemyCount < 30; EnemyCount++) /*弾30発*/
+		{
+			if (enemy[EnemyCount] == nullptr)
+			{
+				break;
+			}
+			bullet = enemy[EnemyCount]->GetBullets();
+
+			for (int i = 0; i < 30; i++)
+			{
+				if (bullet[i] == nullptr)
+
+					break;
+
+				if (player->HitSphere(bullet[i]))
+				{
+					player->Hit(bullet[i]->GetDamege());
+
+					enemy[EnemyCount]->DeleteBullet(i);
+
+					i--; //もう一回見る
+				}
+			}
+		}
 	
 		/*アイテムの削除処理*/
 		for (int ItemCount = 0; ItemCount < 10; ItemCount++)
