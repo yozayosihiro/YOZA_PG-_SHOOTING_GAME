@@ -1,4 +1,8 @@
 #pragma once
+#include"DxLib.h"
+
+#define SCREEN_HEIGHT 720
+#define SCREEN_WIGHT  1280
 
 enum class GAME_STATE {
     GAME_TITLE = 0,  // 0

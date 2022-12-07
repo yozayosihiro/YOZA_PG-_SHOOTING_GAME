@@ -3,8 +3,9 @@
 #include"BulletsStraight.h"
 #include"EnemyBulletsStraight.h"
 #include "KeyManager.h"
-
-Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 0,0.5 }, 20.f), hp(10), point(10)
+#include"BulletsRotation.h"
+                                                                /*speed*/             /*   初   期   化   */
+Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 0,0.5 }, 20.f), hp(10), point(10), shotNum(0)
 {
 	/*BulletsBase** bullets*//*2重配列*/
 	bullets = new BulletsBase * [30]; /*同時に出せる弾の数 30*/
@@ -92,8 +93,13 @@ void Enemy::Update()
 	{
 		if (BulleCount < 30 && bullets[BulleCount] == nullptr) /*発射カウント*/
 		{
+			/*弾幕作成*/                                /*位置*/  /*speed*/ /*発射角度*/
+			bullets[BulleCount] = new BulletsRotation(GetLocation(), 2.f, (20 * shotNum));
+
+			shotNum++; /*足していく*/
+
 			                                                   /*BulletsStraightの引数*/
-			bullets[BulleCount] = new BulletsStraight(GetLocation(),T_Location {0,-4}); /*BulletsStraightを作成*/
+			//bullets[BulleCount] = new BulletsStraight(GetLocation(),T_Location {0,-4}); /*BulletsStraightを作成*/
 			//bullets[BulleCount] = new EnemyBulletsStraight(GetLocation()); /*強引BulletsStraightを作成*/
 			//
 		}

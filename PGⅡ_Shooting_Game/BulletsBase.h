@@ -14,6 +14,7 @@ protected:
 
 public: /*弾丸：コンストラクタ*/
 
+	/*弾丸：コンストラクタ(T_Location 位置, T_Location スピード, float 半径, int ダメージ)*/
 	BulletsBase(T_Location location, T_Location speed, float radius, int damage);
 
 public:

@@ -9,6 +9,8 @@ private:
 
 	int point; /*敵：ポインタ取得*/
 
+	int shotNum; /*敵：自分が弾を出した値を持たせる*/
+
 public: /*コンストラクタ*/
 
 	Enemy(T_Location location);

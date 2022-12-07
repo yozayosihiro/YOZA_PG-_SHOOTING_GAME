@@ -16,7 +16,7 @@ protected:
 
 public: /*アイテム：コンストラクタ*/
 
-	/*アイテム：コンストラクタ*/
+	/*アイテム：コンストラクタ(T_Location 位置, float 半径, enumアイテム, T_Location スピード)*/
 	ItemBase(T_Location location, float radius, enum_ItemType type, T_Location speed);
 
 public:

@@ -4,8 +4,8 @@ class BulletsRotation : public BulletsBase
 {
 
 public:/*回転式弾丸：コンストラクタ*/
-
-	BulletsRotation(T_Location location, T_Location speed /*= T_Location{0.-2}*/);
+	                                                /*敵が弾を発射する*/
+	BulletsRotation(T_Location location, float speed, int degAngle);
 
 public:
 

@@ -38,6 +38,36 @@
 //	return NextScene;
 //}
 
+/***********************************************
+ * ゲームメイン
+ ***********************************************/
+GameMainScene::GameMainScene()
+{
+	T_Location location = T_Location{ 20,100 };/*プレイヤーの出現位置*/
+
+	player = new Player(location);
+
+	enemy = new Enemy * [10];
+
+	for (int i = 0; i < 10; i++) /*敵の初期化*/
+	{
+		enemy[i] = nullptr; /*nullpointerで初期化*/
+	}
+
+	/*アイテム初期化*/
+	/*newで領域確保*/
+	//enemy[0] = new Enemy(T_Location{200,0}); /*敵を一体だけ作る*/
+
+	enemy[0] = new Enemy(T_Location{ 1280 / 2,720 / 2 }); /*真ん中に生成  敵を一体だけ作る*/
+
+	item = new ItemBase * [10];
+
+	for (int i = 0; i < 10; i++)
+	{
+		item[i] = nullptr; /*初期化*/
+	}
+}
+
 /*ゲームメイン：描画以外の更新を実行する*/
 void GameMainScene::Update() {
 
@@ -301,32 +331,4 @@ void GameMainScene::Draw() const {
 AbstractScene* GameMainScene::ChangeScene() {
 
 	return this;
-}
-
-/***********************************************
- * ゲームメイン
- ***********************************************/
-GameMainScene::GameMainScene()
-{
-	T_Location location = T_Location{ 20,100 };/*プレイヤーの出現位置*/
-
-	player = new Player(location);
-
-	enemy = new Enemy * [10];
-
-	for (int i = 0; i < 10; i++) /*敵の初期化*/
-	{
-		enemy[i] = nullptr; /*nullpointerで初期化*/
-	}
-
-	/*アイテム初期化*/
-	/*newで領域確保*/
-	enemy[0] = new Enemy(T_Location{200,0}); /*敵を一体だけ作る*/
-
-	item = new ItemBase * [10];
-
-	for (int i = 0; i < 10; i++)
-	{
-		item[i] = nullptr; /*初期化*/
-	}
 }

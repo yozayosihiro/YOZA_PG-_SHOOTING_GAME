@@ -25,6 +25,7 @@ protected:/*キャラ：コンストラクタ*/
 	//Enemy** enemy; /*(ポインタ配列)*/
 	//
 
+	/*キャラ：コンストラクタ(T_Location 位置, T_Location スピード, float 半径)*/
 	CharaBase(T_Location location, T_Location speed, float radius);
 
 public:
