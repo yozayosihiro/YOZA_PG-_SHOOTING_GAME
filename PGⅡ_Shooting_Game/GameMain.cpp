@@ -58,7 +58,7 @@ GameMainScene::GameMainScene()
 	/*new‚Å—ÌˆæŠm•Û*/
 	//enemy[0] = new Enemy(T_Location{200,0}); /*“G‚ğˆê‘Ì‚¾‚¯ì‚é*/
 
-	enemy[0] = new Enemy(T_Location{ 1280 / 2,720 / 2 }); /*^‚ñ’†‚É¶¬  “G‚ğˆê‘Ì‚¾‚¯ì‚é*/
+	enemy[0] = new Enemy(T_Location{ 1280 / 2,0 }); /*^‚ñ’†‚É¶¬  “G‚ğˆê‘Ì‚¾‚¯ì‚é*/
 
 	item = new ItemBase * [10];
 

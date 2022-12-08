@@ -4,8 +4,16 @@
 #include"EnemyBulletsStraight.h"
 #include "KeyManager.h"
 #include"BulletsRotation.h"
-                                                                /*speed*/             /*   初   期   化   */
-Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 0,0.5 }, 20.f), hp(10), point(10), shotNum(0)
+
+T_Location loopLocations[4] = /*繰り返し移動用の座標*/
+{ 
+	{1280 / 2,0},  /*移動1*/
+	{1280 / 2,30}, /*移動2*/
+	{1250,100},    /*移動3*/
+	{10,100},      /*移動4*/
+};
+                                                                /*speed*/                  /*   初   期   化   */
+Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 0,0 }, 20.f), hp(10), point(10), shotNum(0),locationNum(0)
 {
 	/*BulletsBase** bullets*//*2重配列*/
 	bullets = new BulletsBase * [30]; /*同時に出せる弾の数 30*/
@@ -20,11 +28,65 @@ Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 0,0.5 }, 20.
 /*敵：描画以外の更新を実行する*/
 void Enemy::Update()
 {
-	/*LocationをLocationに移動させる処理*/
+
+/*****************************************************************
+*                                                                *
+*                        敵の移動処理                            *
+*                                                                *
+ *****************************************************************/
+
+	/*敵の移動 LocationをLocationに移動させる処理*/
 	T_Location NewLocation = GetLocation();
 
-	NewLocation.y += speed.y; /*エネミーはスピードの値をみて移動*/
-	SetLocation(NewLocation);
+	/*敵の移動処理*/
+	if (NewLocation.x != loopLocations[locationNum].x) /*敵のX座標と目標のX座標が違かったら*/
+	{
+		if (NewLocation.x < loopLocations[locationNum].x)  /*敵のX座標より目標のX座標が大きかったら X座標の右移動*/
+		{
+		    speed.x = 1;  /*X座標の右移動 スピードXで移動*/
+		}
+		 if (NewLocation.x > loopLocations[locationNum].x) /*敵のX座標より目標のX座標が小さかったら X座標の左移動*/
+		{
+			speed.x = -1; /*X座標の左移動 スピードXで移動*/
+		}
+
+		 NewLocation.x += speed.x; /*エネミーはスピードXの値をみて移動*/
+	}
+	 /*敵のX座標と目標のX座標が一致したとき*/
+	else if (NewLocation.y != loopLocations[locationNum].y) /*敵のY座標と目標のY座標が違かったら*/
+	{
+		speed.x = 0; /*X座標の移動をしないように*/
+
+		if (NewLocation.y < loopLocations[locationNum].y) /*敵のY座標より目標のY座標が大きかったら Y座標の上移動*/
+		{
+			speed.y = 1;  /*Y座標の上移動 スピードYで移動*/
+		}
+		if (NewLocation.y > loopLocations[locationNum].y) /*敵のY座標より目標のY座標が小さかったら Y座標の下移動*/
+		{
+			speed.y = -1; /*Y座標の下移動 スピードYで移動*/ 
+		}
+
+		NewLocation.y += speed.y; /*エネミーはスピードYの値をみて移動*/
+	}
+	 /*敵のXY座標と目標のXY座標が一致したとき*/
+	else 
+	{ 
+		speed.y = 0;   /*Y座標の移動をしないように*/
+
+		locationNum++; /*次の移動用の座標に*/
+	}
+
+	/*移動用の座標をループする*/
+	if (locationNum > 3)  
+	{
+		locationNum = 2; 
+	}
+
+	//NewLocation.x += speed.x; /*エネミーはスピードXの値をみて移動*/
+	//NewLocation.y += speed.y; /*エネミーはスピードYの値をみて移動*/
+
+	SetLocation(NewLocation); /*敵の移動処理のセット*/
+/******************************************************************/
 
 	int BulleCount;
 
@@ -99,7 +161,7 @@ void Enemy::Update()
 			shotNum++; /*足していく*/
 
 			                                                   /*BulletsStraightの引数*/
-			//bullets[BulleCount] = new BulletsStraight(GetLocation(),T_Location {0,-4}); /*BulletsStraightを作成*/
+			/*bullets[BulleCount] = new BulletsStraight(GetLocation(),T_Location {0,-4}); /*BulletsStraightを作成*/
 			//bullets[BulleCount] = new EnemyBulletsStraight(GetLocation()); /*強引BulletsStraightを作成*/
 			//
 		}

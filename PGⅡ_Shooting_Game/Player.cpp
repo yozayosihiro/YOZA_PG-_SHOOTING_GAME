@@ -19,30 +19,28 @@ Player::Player(T_Location location) : CharaBase(location, T_Location{ 2,2 }, 10.
 /*プレイヤー：描画以外の更新を実行する*/
 void Player::Update()
 {
-	/*LocationをLocationに移動させる処理*/
+	/*プレイヤーの移動 LocationをLocationに移動させる処理*/
 	T_Location NewLocation = GetLocation();
 
+	/*プレイヤーの移動処理*/
 	if (KeyManager::OnKeyPressed(KEY_INPUT_W)) /*上移動*/
 	{
 		NewLocation.y -= speed.y;
 	}
-
 	if (KeyManager::OnKeyPressed(KEY_INPUT_A)) /*左移動*/
 	{
 		NewLocation.x -= speed.x;
 	}
-
 	if (KeyManager::OnKeyPressed(KEY_INPUT_S)) /*下移動*/
 	{
 		NewLocation.y += speed.y;
 	}
-
 	if (KeyManager::OnKeyPressed(KEY_INPUT_D)) /*右移動*/
 	{
 		NewLocation.x += speed.x;
 	}
 
-	SetLocation(NewLocation);
+	SetLocation(NewLocation); /*プレイヤーの移動処理のセット*/
 
 	int BulleCount;
 

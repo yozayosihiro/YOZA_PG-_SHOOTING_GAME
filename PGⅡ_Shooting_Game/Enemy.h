@@ -11,6 +11,8 @@ private:
 
 	int shotNum; /*敵：自分が弾を出した値を持たせる*/
 
+	int locationNum; /*繰り返し移動用の座標の番号を示す*/
+
 public: /*コンストラクタ*/
 
 	Enemy(T_Location location);
