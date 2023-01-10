@@ -5,15 +5,64 @@
 #include "KeyManager.h"
 #include"BulletsRotation.h"
 
-T_Location loopLocations[4] = /*繰り返し移動用の座標*/
-{ 
-	{1280 / 2,0},  /*移動1*/
-	{1280 / 2,30}, /*移動2*/
-	{1250,100},    /*移動3*/
-	{10,100},      /*移動4*/
+/*敵：移動・動きの情報*/
+struct MoveInformation 
+{
+	T_Location TargetLocation; 
+
+	int pattern;       /*方法・パターン*/
+
+	int attackPattern; /*攻撃方法*/
+
+	int next;          /*次の(配列)処理*/
+
+	int waitTimeFlame; /*(待ちなど)時間*/
+
+	/*int attackPattern; /*攻撃方法*/
 };
-                                                                /*speed*/                  /*   初   期   化   */
-Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 0,0 }, 20.f), hp(10), point(10), shotNum(0),locationNum(0)
+
+MoveInformation MoveInfo[10] =
+{
+	//{640,150,0,1,0,0} ,  /*{X座標,Y座標,パターン,攻撃方法,次の(配列)処理,(待ちなど)時間}*/
+	//{1200.4,150,0,2,0,0},
+	//{0,0,1,3,180,0},
+	//{80.2,150,0,4,0,2},
+	//{0,0,1,5,180,1},
+	//{1200.4,150,0,2,0,1},
+
+	{640,150,0,0,1,0} ,  /*{X座標,Y座標,パターン,攻撃方法,次の(配列)処理,(待ちなど)時間}*/
+	{1200.4,150,0,0,2,0},
+	{0,0,1,0,3,180},
+	{80.2,150,0,2,4,0},
+	{0,0,1,1,5,180},
+	{1200.4,150,0,1,2,0},
+};
+
+//T_Location loopLocations[4] = /*繰り返し移動用の座標*/
+//{
+//	{640,150},	  /*移動1*/
+//	{1200.4,150}, /*移動2*/
+//	{80.2,150}    /*移動3*/
+//}; 
+
+/*別方法*/
+T_Location loopLocations[3] = /*繰り返し移動用の座標*/
+{
+	{640,150},	  /*移動1*/
+	{1200.4,150}, /*移動2*/
+	{80.2,150},   /*移動3*/
+};
+
+int Next[3] = /*移動番号*/
+{
+	1, /*移動1*/
+	2, /*移動2*/
+	3, /*移動3*/
+};
+
+int current = 0; /*処理用番号の変数*/
+                                                          /*speed   X,Y */                  /*   初   期   化   */
+Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 2,2 }, 20.f), hp(10), point(10), shotNum(0),locationNum(0)
 {
 	/*BulletsBase** bullets*//*2重配列*/
 	bullets = new BulletsBase * [30]; /*同時に出せる弾の数 30*/
@@ -25,70 +74,129 @@ Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 0,0 }, 20.f)
 	}
 }
 
+/*敵：移動処理*/
+void Enemy::Move()
+{
+	T_Location NextLocation = GetLocation(); /*敵の座標・今の座標を次の座標に入れる*/
+
+	if ((NextLocation.y == loopLocations[current].y) && (NextLocation.x == loopLocations[current].x)) /*同じ座標にいたら次へ*/
+	{
+		current = Next[current];
+	}
+	else /*目的地にいなかったときは*/
+	{
+		/*縦の移動処理*/
+		if (NextLocation.y != loopLocations[current].y) /*Y座標*/
+		{
+			if (NextLocation.y < loopLocations[current].y)
+			{
+				NextLocation.y += speed.y; /*下移動*/
+
+				if ((GetLocation().y <= loopLocations[current].y) && (loopLocations[current].y <= NextLocation.y)) /*((今のY座標 <= 目的地) && 目的地 <= 次のY座標))*/
+				{
+					NextLocation.y = loopLocations[current].y; /*目的地を飛び超えたとき*/
+				}
+			}
+			else
+			{
+				NextLocation.y -= speed.y; /*上移動*/
+
+				if ((NextLocation.y <= loopLocations[current].y) && (loopLocations[current].y <= GetLocation().y)) /*((次のY座標 <= 目的地) && (目的地 <= 今のY座標))*/
+				{
+					NextLocation.y = loopLocations[current].y;
+				}
+			}
+		}
+	}
+	/*横の移動処理*/
+	if (NextLocation.x != loopLocations[current].x) /*X座標*/
+	{
+		if (NextLocation.x < loopLocations[current].x)
+		{
+			NextLocation.x += speed.x; /*右移動*/
+
+			if ((GetLocation().x <= loopLocations[current].x) && (loopLocations[current].x <= NextLocation.x)) /*((今のX座標 <= 目的地) && 目的地 <= 次のX座標))*/
+			{
+				NextLocation.x = loopLocations[current].x; /*目的地を飛び超えたとき*/
+			}
+		}
+		else
+		{
+			NextLocation.x -= speed.x; /*左移動*/
+
+			if ((NextLocation.x <= loopLocations[current].x) && (loopLocations[current].x <= GetLocation().x)) /*((次のX座標 <= 目的地) && (目的地 <= 今のX座標))*/
+			{
+				NextLocation.x = loopLocations[current].x; /*目的地を飛び超えたとき*/
+			}
+		}
+	}
+	SetLocation(NextLocation); /*敵の移動処理のセット*/
+}
+
+/*敵：移動処理*/
+//void Enemy::Move()
+//{
+//	 /*敵の移動 LocationをLocationに移動させる処理*/
+//	T_Location NewLocation = GetLocation();
+//
+//	/*敵の移動処理*/
+//	if (NewLocation.x != loopLocations[locationNum].x) /*敵のX座標と目標のX座標が違かったら*/
+//	{
+//		if (NewLocation.x < loopLocations[locationNum].x)  /*敵のX座標より目標のX座標が大きかったら X座標の右移動*/
+//		{
+//			speed.x = 1;  /*X座標の右移動 スピードXで移動*/
+//		}
+//		if (NewLocation.x > loopLocations[locationNum].x) /*敵のX座標より目標のX座標が小さかったら X座標の左移動*/
+//		{
+//			speed.x = -1; /*X座標の左移動 スピードXで移動*/
+//		}
+//
+//		NewLocation.x += speed.x; /*エネミーはスピードXの値をみて移動*/
+//	}
+//	/*敵のX座標と目標のX座標が一致したとき*/
+//	else if (NewLocation.y != loopLocations[locationNum].y) /*敵のY座標と目標のY座標が違かったら*/
+//	{
+//		speed.x = 0; /*X座標の移動をしないように*/
+//
+//		if (NewLocation.y < loopLocations[locationNum].y) /*敵のY座標より目標のY座標が大きかったら Y座標の上移動*/
+//		{
+//			speed.y = 1;  /*Y座標の上移動 スピードYで移動*/
+//		}
+//		if (NewLocation.y > loopLocations[locationNum].y) /*敵のY座標より目標のY座標が小さかったら Y座標の下移動*/
+//		{
+//			speed.y = -1; /*Y座標の下移動 スピードYで移動*/
+//		}
+//
+//		NewLocation.y += speed.y; /*エネミーはスピードYの値をみて移動*/
+//	}
+//	/*敵のXY座標と目標のXY座標が一致したとき*/
+//	else
+//	{
+//		speed.y = 0;   /*Y座標の移動をしないように*/
+//
+//		locationNum++; /*次の移動用の座標に*/
+//	}
+//
+//	/*移動用の座標をループする*/
+//	if (locationNum > 3)
+//	{
+//		locationNum = 2;
+//	}
+//
+//	//NewLocation.x += speed.x; /*エネミーはスピードXの値をみて移動*/
+//	//NewLocation.y += speed.y; /*エネミーはスピードYの値をみて移動*/
+//
+//	SetLocation(NewLocation); /*敵の移動処理のセット*/
+//******************************************************************
+//}
+
 /*敵：描画以外の更新を実行する*/
 void Enemy::Update()
 {
-
-/*****************************************************************
-*                                                                *
-*                        敵の移動処理                            *
-*                                                                *
- *****************************************************************/
-
-	/*敵の移動 LocationをLocationに移動させる処理*/
-	T_Location NewLocation = GetLocation();
-
-	/*敵の移動処理*/
-	if (NewLocation.x != loopLocations[locationNum].x) /*敵のX座標と目標のX座標が違かったら*/
-	{
-		if (NewLocation.x < loopLocations[locationNum].x)  /*敵のX座標より目標のX座標が大きかったら X座標の右移動*/
-		{
-		    speed.x = 1;  /*X座標の右移動 スピードXで移動*/
-		}
-		 if (NewLocation.x > loopLocations[locationNum].x) /*敵のX座標より目標のX座標が小さかったら X座標の左移動*/
-		{
-			speed.x = -1; /*X座標の左移動 スピードXで移動*/
-		}
-
-		 NewLocation.x += speed.x; /*エネミーはスピードXの値をみて移動*/
-	}
-	 /*敵のX座標と目標のX座標が一致したとき*/
-	else if (NewLocation.y != loopLocations[locationNum].y) /*敵のY座標と目標のY座標が違かったら*/
-	{
-		speed.x = 0; /*X座標の移動をしないように*/
-
-		if (NewLocation.y < loopLocations[locationNum].y) /*敵のY座標より目標のY座標が大きかったら Y座標の上移動*/
-		{
-			speed.y = 1;  /*Y座標の上移動 スピードYで移動*/
-		}
-		if (NewLocation.y > loopLocations[locationNum].y) /*敵のY座標より目標のY座標が小さかったら Y座標の下移動*/
-		{
-			speed.y = -1; /*Y座標の下移動 スピードYで移動*/ 
-		}
-
-		NewLocation.y += speed.y; /*エネミーはスピードYの値をみて移動*/
-	}
-	 /*敵のXY座標と目標のXY座標が一致したとき*/
-	else 
-	{ 
-		speed.y = 0;   /*Y座標の移動をしないように*/
-
-		locationNum++; /*次の移動用の座標に*/
-	}
-
-	/*移動用の座標をループする*/
-	if (locationNum > 3)  
-	{
-		locationNum = 2; 
-	}
-
-	//NewLocation.x += speed.x; /*エネミーはスピードXの値をみて移動*/
-	//NewLocation.y += speed.y; /*エネミーはスピードYの値をみて移動*/
-
-	SetLocation(NewLocation); /*敵の移動処理のセット*/
-/******************************************************************/
-
 	int BulleCount;
+
+	/*敵：移動処理*/
+	Move();
 
 	for (BulleCount = 0; BulleCount < 30; BulleCount++) /*発射カウント*/
 	{

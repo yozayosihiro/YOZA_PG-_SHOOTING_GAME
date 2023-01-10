@@ -1,0 +1,58 @@
+/*****************************************************************
+*                                                                *
+*                        敵の移動処理                            *
+*                                                                *
+ *****************************************************************/
+
+	/*敵の移動 LocationをLocationに移動させる処理*/
+	T_Location NewLocation = GetLocation();
+
+	/*敵の移動処理*/
+	if (NewLocation.x != loopLocations[locationNum].x) /*敵のX座標と目標のX座標が違かったら*/
+	{
+		if (NewLocation.x < loopLocations[locationNum].x)  /*敵のX座標より目標のX座標が大きかったら X座標の右移動*/
+		{
+		    speed.x = 1;  /*X座標の右移動 スピードXで移動*/
+		}
+		 if (NewLocation.x > loopLocations[locationNum].x) /*敵のX座標より目標のX座標が小さかったら X座標の左移動*/
+		{
+			speed.x = -1; /*X座標の左移動 スピードXで移動*/
+		}
+
+		 NewLocation.x += speed.x; /*エネミーはスピードXの値をみて移動*/
+	}
+	 /*敵のX座標と目標のX座標が一致したとき*/
+	else if (NewLocation.y != loopLocations[locationNum].y) /*敵のY座標と目標のY座標が違かったら*/
+	{
+		speed.x = 0; /*X座標の移動をしないように*/
+
+		if (NewLocation.y < loopLocations[locationNum].y) /*敵のY座標より目標のY座標が大きかったら Y座標の上移動*/
+		{
+			speed.y = 1;  /*Y座標の上移動 スピードYで移動*/
+		}
+		if (NewLocation.y > loopLocations[locationNum].y) /*敵のY座標より目標のY座標が小さかったら Y座標の下移動*/
+		{
+			speed.y = -1; /*Y座標の下移動 スピードYで移動*/ 
+		}
+
+		NewLocation.y += speed.y; /*エネミーはスピードYの値をみて移動*/
+	}
+	 /*敵のXY座標と目標のXY座標が一致したとき*/
+	else 
+	{ 
+		speed.y = 0;   /*Y座標の移動をしないように*/
+
+		locationNum++; /*次の移動用の座標に*/
+	}
+
+	/*移動用の座標をループする*/
+	if (locationNum > 3)  
+	{
+		locationNum = 2; 
+	}
+
+	//NewLocation.x += speed.x; /*エネミーはスピードXの値をみて移動*/
+	//NewLocation.y += speed.y; /*エネミーはスピードYの値をみて移動*/
+
+	SetLocation(NewLocation); /*敵の移動処理のセット*/
+/******************************************************************/

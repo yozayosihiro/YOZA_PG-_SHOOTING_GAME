@@ -39,6 +39,9 @@ public:
 	/*敵：ポインタ取得処理*/
 	int GetPoint();
 
+	/*敵：移動処理*/
+	void Move();
+
 	/*エネミーの削除処理*/
 	//void DeleteEnemy(int EnemyNum);
 	//
