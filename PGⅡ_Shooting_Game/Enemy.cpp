@@ -8,35 +8,58 @@
 /*敵：移動・動きの情報*/
 struct MoveInformation 
 {
-	T_Location TargetLocation; 
+	int pattern;               /*方法・パターン*/
 
-	int pattern;       /*方法・パターン*/
+	T_Location TargetLocation; /*目的地*/
 
-	int attackPattern; /*攻撃方法*/
+	int next;                  /*次の(配列)処理*/
 
-	int next;          /*次の(配列)処理*/
+	int waitTimeFlame;         /*(待ちなど)時間*/
 
-	int waitTimeFlame; /*(待ちなど)時間*/
-
-	/*int attackPattern; /*攻撃方法*/
+	int attackPattern;         /*攻撃方法*/
 };
 
+/*敵：移動, 目的地, NEXT, 待ち時間, 攻撃方法の配列*/
 MoveInformation MoveInfo[10] =
 {
-	//{640,150,0,1,0,0} ,  /*{X座標,Y座標,パターン,攻撃方法,次の(配列)処理,(待ちなど)時間}*/
-	//{1200.4,150,0,2,0,0},
-	//{0,0,1,3,180,0},
-	//{80.2,150,0,4,0,2},
-	//{0,0,1,5,180,1},
-	//{1200.4,150,0,2,0,1},
+/* 方法,    目的地,   NEXT,   待ち時間,  攻撃方法 */
 
-	{640,150,0,0,1,0} ,  /*{X座標,Y座標,パターン,攻撃方法,次の(配列)処理,(待ちなど)時間}*/
-	{1200.4,150,0,0,2,0},
-	{0,0,1,0,3,180},
-	{80.2,150,0,2,4,0},
-	{0,0,1,1,5,180},
-	{1200.4,150,0,1,2,0},
+	{0,     640, 150,    1,        0,         0}, 
+	{0,  1200.4, 150,    2,        0,         2}, 
+	{1,       0,   0,    3,      300,         1}, 
+	{0,    80.2, 150,    4,        0,         2}, 
+	{1,       0,   0,    3,      300,         1}
+
+	//{640,150,0,0,1,0} ,  /*{X座標,Y座標,パターン,攻撃方法,次の(配列)処理,(待ちなど)時間}*/
+	//{1200.4,150,0,0,2,0},
+	//{0,0,1,0,3,180},
+	//{80.2,150,0,2,4,0},
+	//{0,0,1,1,5,180},
+	//{1200.4,150,0,1,2,0},
 };
+
+//struct ENEMY_MOVE
+//{
+//	int pattern;       /*方法・パターン*/
+//
+//	int waitTimeFlame; /*(待ちなど)時間*/
+//
+//	T_Location TargetLocation;
+//
+//	int next;          /*次の(配列)処理*/
+//
+//	//int attackPattern; /*攻撃方法*/
+//};
+//
+//ENEMY_MOVE MovePattern[6] = 
+//{
+//	{0, 0, 640.f, }
+//	{}
+//	{}
+//	{}
+//	{}
+//	{}
+//}
 
 //T_Location loopLocations[4] = /*繰り返し移動用の座標*/
 //{
@@ -61,6 +84,7 @@ int Next[3] = /*移動番号*/
 };
 
 int current = 0; /*処理用番号の変数*/
+int waitCount = 0; /*停滞時間*/
                                                           /*speed   X,Y */                  /*   初   期   化   */
 Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 2,2 }, 20.f), hp(10), point(10), shotNum(0),locationNum(0)
 {
@@ -79,45 +103,45 @@ void Enemy::Move()
 {
 	T_Location NextLocation = GetLocation(); /*敵の座標・今の座標を次の座標に入れる*/
 
-	if ((NextLocation.y == loopLocations[current].y) && (NextLocation.x == loopLocations[current].x)) /*同じ座標にいたら次へ*/
+	if ((NextLocation.y == MoveInfo[current].TargetLocation.y) && (NextLocation.x == MoveInfo[current].TargetLocation.x)) /*同じ座標にいたら次へ*/
 	{
-		current = Next[current];
+		current = MoveInfo[current].next;
 	}
 	else /*目的地にいなかったときは*/
 	{
 		/*縦の移動処理*/
-		if (NextLocation.y != loopLocations[current].y) /*Y座標*/
+		if (NextLocation.y != MoveInfo[current].TargetLocation.y) /*Y座標*/
 		{
-			if (NextLocation.y < loopLocations[current].y)
+			if (NextLocation.y < MoveInfo[current].TargetLocation.y)
 			{
 				NextLocation.y += speed.y; /*下移動*/
 
-				if ((GetLocation().y <= loopLocations[current].y) && (loopLocations[current].y <= NextLocation.y)) /*((今のY座標 <= 目的地) && 目的地 <= 次のY座標))*/
+				if ((GetLocation().y <= MoveInfo[current].TargetLocation.y) && (MoveInfo[current].TargetLocation.y <= NextLocation.y)) /*((今のY座標 <= 目的地) && 目的地 <= 次のY座標))*/
 				{
-					NextLocation.y = loopLocations[current].y; /*目的地を飛び超えたとき*/
+					NextLocation.y = MoveInfo[current].TargetLocation.y; /*目的地を飛び超えたとき*/
 				}
 			}
 			else
 			{
 				NextLocation.y -= speed.y; /*上移動*/
 
-				if ((NextLocation.y <= loopLocations[current].y) && (loopLocations[current].y <= GetLocation().y)) /*((次のY座標 <= 目的地) && (目的地 <= 今のY座標))*/
+				if ((NextLocation.y <= MoveInfo[current].TargetLocation.y) && (MoveInfo[current].TargetLocation.y <= GetLocation().y)) /*((次のY座標 <= 目的地) && (目的地 <= 今のY座標))*/
 				{
-					NextLocation.y = loopLocations[current].y;
+					NextLocation.y = MoveInfo[current].TargetLocation.y;
 				}
 			}
 		}
 	}
 	/*横の移動処理*/
-	if (NextLocation.x != loopLocations[current].x) /*X座標*/
+	if (NextLocation.x != MoveInfo[current].TargetLocation.x) /*X座標*/
 	{
-		if (NextLocation.x < loopLocations[current].x)
+		if (NextLocation.x < MoveInfo[current].TargetLocation.x)
 		{
 			NextLocation.x += speed.x; /*右移動*/
 
-			if ((GetLocation().x <= loopLocations[current].x) && (loopLocations[current].x <= NextLocation.x)) /*((今のX座標 <= 目的地) && 目的地 <= 次のX座標))*/
+			if ((GetLocation().x <= MoveInfo[current].TargetLocation.x) && (MoveInfo[current].TargetLocation.x <= NextLocation.x)) /*((今のX座標 <= 目的地) && 目的地 <= 次のX座標))*/
 			{
-				NextLocation.x = loopLocations[current].x; /*目的地を飛び超えたとき*/
+				NextLocation.x = MoveInfo[current].TargetLocation.x; /*目的地を飛び超えたとき*/
 			}
 		}
 		else
@@ -193,29 +217,26 @@ void Enemy::Move()
 /*敵：描画以外の更新を実行する*/
 void Enemy::Update()
 {
-	int BulleCount;
+	int bulletCount;
 
-	/*敵：移動処理*/
-	Move();
-
-	for (BulleCount = 0; BulleCount < 30; BulleCount++) /*発射カウント*/
+	for (bulletCount = 0; bulletCount < 30; bulletCount++) /*発射カウント*/
 	{
-		if (bullets[BulleCount] == nullptr)
+		if (bullets[bulletCount] == nullptr)
 		{
 			break;
 		}
 
-		bullets[BulleCount]->Update(); /*弾のアップデート*/
+		bullets[bulletCount]->Update(); /*弾のアップデート*/
 
 		/*画面外に行ったら弾を消す*/
-		if (bullets[BulleCount]->ScreenOut())
+		if (bullets[bulletCount]->ScreenOut())
 		{
 			/*弾丸の消去*/
 			//delete bullets[BulleCount]; /*弾を消す(デリート)*/
 			//bullets[BulleCount] = nullptr; /*NULL POINTER(ヌル・ポインター)で上書き*/
 
-			DeleteBullet(BulleCount);
-			BulleCount--;
+			DeleteBullet(bulletCount);
+			bulletCount--;
 
 			/*配列を前に詰める・++ */
 			//for (int i = BulleCount; i < 30 - 1; i++) /*28までループ*/
@@ -259,19 +280,60 @@ void Enemy::Update()
 	}
 
 	/*敵：弾丸の発射*/
-	if (1) /*自動で*/
+	//if (1) /*自動で*/
+	//{
+	//	if (bulletCount < 30 && bullets[bulletCount] == nullptr) /*発射カウント*/
+	//	{
+	//		/*弾幕作成*/                                /*位置*/  /*speed*/ /*発射角度*/
+	//		bullets[bulletCount] = new BulletsRotation(GetLocation(), 2.f, (20 * shotNum));
+	//
+	//		shotNum++; /*足していく*/
+	//
+	//		                                                   /*BulletsStraightの引数*/
+	//		/*bullets[BulleCount] = new BulletsStraight(GetLocation(),T_Location {0,-4}); /*BulletsStraightを作成*/
+	//		//bullets[BulleCount] = new EnemyBulletsStraight(GetLocation()); /*強引BulletsStraightを作成*/
+	//		//
+	//	}
+	//}
+
+	/*敵：移動・攻撃の処理パターン*/
+	switch (MoveInfo[current].pattern)
 	{
-		if (BulleCount < 30 && bullets[BulleCount] == nullptr) /*発射カウント*/
+	case 0:
+		Move(); /*敵：移動処理*/
+		break;
+
+	case 1:
+		waitCount++; /*停滞時間++*/
+
+  /*(敵の処理情報[処理用番号].(待ちなど)時間 <= 停滞時間)*/
+		if (MoveInfo[current].waitTimeFlame <= waitCount) 
 		{
-			/*弾幕作成*/                                /*位置*/  /*speed*/ /*発射角度*/
-			bullets[BulleCount] = new BulletsRotation(GetLocation(), 2.f, (20 * shotNum));
+			waitCount = 0; /*停滞時間 = 0*/
 
-			shotNum++; /*足していく*/
+			current = MoveInfo[current].next; /*処理用番号 = 敵処理情報[処理用番号].NEXT(次へ)*/
+		}
+		break;
 
-			                                                   /*BulletsStraightの引数*/
-			/*bullets[BulleCount] = new BulletsStraight(GetLocation(),T_Location {0,-4}); /*BulletsStraightを作成*/
-			//bullets[BulleCount] = new EnemyBulletsStraight(GetLocation()); /*強引BulletsStraightを作成*/
-			//
+	default:
+		break;
+	}
+   /*(敵の処理情報[処理用番号].攻撃方法 != 0)*/
+	if (MoveInfo[current].attackPattern != 0) { 
+		if (bulletCount < 30 && bullets[bulletCount] == nullptr) /*発射カウント*/
+		{
+	       /*(敵の処理情報[処理用番号].攻撃方法 != 1)*/
+			if (MoveInfo[current].attackPattern == 1) 
+			{
+				bullets[bulletCount] = new BulletsStraight(GetLocation(), T_Location{ 0, 2 });
+			}
+		   /*(敵の処理情報[処理用番号].攻撃方法 == 2)*/
+			if (MoveInfo[current].attackPattern == 2) 
+			{
+				shotNum++;
+
+				bullets[bulletCount] = new BulletsRotation(GetLocation(), 2.f, (20 * shotNum));
+			}
 		}
 	}
 }
@@ -282,13 +344,13 @@ void Enemy::Draw()
 	DrawCircle(GetLocation().x, GetLocation().y, GetRadius(), GetColor(255, 0, 255));
 
 	/*弾丸の描画*/
-	for (int BulleCount = 0; BulleCount < 30; BulleCount++)
+	for (int BulletCount = 0; BulletCount < 30; BulletCount++)
 	{
-		if (bullets[BulleCount] == nullptr)
+		if (bullets[BulletCount] == nullptr)
 		{
 			break;
 		}
-		bullets[BulleCount]->Draw();
+		bullets[BulletCount]->Draw();
 	}
 }
 

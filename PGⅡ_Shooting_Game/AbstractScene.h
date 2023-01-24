@@ -14,7 +14,6 @@ public:
 	//virtual AbstractScene* Update() = 0;
 	//
 
-
 	//•`‰æ‚ÉŠÖ‚·‚é‚±‚Æ‚ðŽÀ‘•‚·‚é
 	virtual void Draw() const = 0;
 
