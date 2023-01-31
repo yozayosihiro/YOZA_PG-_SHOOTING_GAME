@@ -22,13 +22,13 @@ struct MoveInformation
 /*敵：移動, 目的地, NEXT, 待ち時間, 攻撃方法の配列*/
 MoveInformation MoveInfo[10] =
 {
-/* 方法,    目的地,   NEXT,   待ち時間,  攻撃方法 */
+/*{方法,    目的地,   NEXT,  待ち時間,  攻撃方法}; */
 
-	{0,     640, 150,    1,        0,         0}, 
-	{0,  1200.4, 150,    2,        0,         2}, 
-	{1,       0,   0,    3,      300,         1}, 
-	{0,    80.2, 150,    4,        0,         2}, 
-	{1,       0,   0,    3,      300,         1}
+	{0,     640, 150,    1,         0,         0}, 
+	{0,  1200.4, 150,    2,         0,         2}, 
+	{1,       0,   0,    3,       300,         1}, 
+	{0,    80.2, 150,    4,         0,         2}, 
+	{1,       0,   0,    1,       300,         1}
 
 	//{640,150,0,0,1,0} ,  /*{X座標,Y座標,パターン,攻撃方法,次の(配列)処理,(待ちなど)時間}*/
 	//{1200.4,150,0,0,2,0},
@@ -85,6 +85,54 @@ int Next[3] = /*移動番号*/
 
 int current = 0; /*処理用番号の変数*/
 int waitCount = 0; /*停滞時間*/
+
+void InputCSV()
+{
+	FILE* fp; /*FILE型構造体*/
+
+	errno_t error; /*fopen_sのエラー確認*/
+
+	error = fopen_s(&fp, "CSV/csv.csv", "r");
+
+	/*(ブレイクポイントを付けて)ファイルの開閉テスト*/
+	if (error != 0)
+	{
+		return; //エラー発生
+	}
+	else //ファイルを開いた
+	{
+		char* line[100]; //行
+
+		/*fgets(line, 文字数, fp)*/
+		//fgets(line, 100, fp); 
+		//
+
+		for (int i = 0; fgets(line[100], 100, fp) != NULL; i++) {
+			while (fgets(line[100], 100, fp) != NULL) //指定の文字数を取ってくる
+			{
+				sscanf_s(
+						  line[100], //行
+
+					"%d, %f, %f, %d, %d, %d",       //(int, float, float, int, int, int)
+
+					& MoveInfo[i].pattern,          /*方法・パターン*/
+
+					& MoveInfo[i].TargetLocation.x, /*目的地.X座標*/
+
+					& MoveInfo[i].TargetLocation.y, /*目的地.Y座標*/
+
+					& MoveInfo[i].next,             /*次の(配列)処理*/
+
+					& MoveInfo[i].waitTimeFlame,    /*(待ちなど)時間*/
+
+					& MoveInfo[i].attackPattern     /*攻撃方法*/
+				 );
+			}
+			return;
+		}
+	}
+	fclose(fp); /*ファイルを閉じる*/
+}
                                                           /*speed   X,Y */                  /*   初   期   化   */
 Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 2,2 }, 20.f), hp(10), point(10), shotNum(0),locationNum(0)
 {
@@ -96,6 +144,7 @@ Enemy::Enemy(T_Location location) : CharaBase(location, T_Location{ 2,2 }, 20.f)
 	{
 		bullets[i] = nullptr;
 	}
+	InputCSV();
 }
 
 /*敵：移動処理*/
@@ -217,7 +266,30 @@ void Enemy::Move()
 /*敵：描画以外の更新を実行する*/
 void Enemy::Update()
 {
-	int bulletCount;
+	/*敵：移動・攻撃の処理パターン*/
+	switch (MoveInfo[current].pattern)
+	{
+	case 0:
+		Move(); /*敵：移動処理*/
+		break;
+
+	case 1:
+		waitCount++; /*停滞時間++*/
+
+  /*(敵の処理情報[処理用番号].(待ちなど)時間 <= 停滞時間)*/
+		if (MoveInfo[current].waitTimeFlame <= waitCount) 
+		{
+			waitCount = 0; /*停滞時間 = 0*/
+
+			current = MoveInfo[current].next; /*処理用番号 = 敵処理情報[処理用番号].NEXT(次へ)*/
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	int bulletCount; /*発射カウント*/
 
 	for (bulletCount = 0; bulletCount < 30; bulletCount++) /*発射カウント*/
 	{
@@ -296,33 +368,11 @@ void Enemy::Update()
 	//	}
 	//}
 
-	/*敵：移動・攻撃の処理パターン*/
-	switch (MoveInfo[current].pattern)
-	{
-	case 0:
-		Move(); /*敵：移動処理*/
-		break;
-
-	case 1:
-		waitCount++; /*停滞時間++*/
-
-  /*(敵の処理情報[処理用番号].(待ちなど)時間 <= 停滞時間)*/
-		if (MoveInfo[current].waitTimeFlame <= waitCount) 
-		{
-			waitCount = 0; /*停滞時間 = 0*/
-
-			current = MoveInfo[current].next; /*処理用番号 = 敵処理情報[処理用番号].NEXT(次へ)*/
-		}
-		break;
-
-	default:
-		break;
-	}
    /*(敵の処理情報[処理用番号].攻撃方法 != 0)*/
 	if (MoveInfo[current].attackPattern != 0) { 
 		if (bulletCount < 30 && bullets[bulletCount] == nullptr) /*発射カウント*/
 		{
-	       /*(敵の処理情報[処理用番号].攻撃方法 != 1)*/
+	       /*(敵の処理情報[処理用番号].攻撃方法 == 1)*/
 			if (MoveInfo[current].attackPattern == 1) 
 			{
 				bullets[bulletCount] = new BulletsStraight(GetLocation(), T_Location{ 0, 2 });
@@ -332,7 +382,7 @@ void Enemy::Update()
 			{
 				shotNum++;
 
-				bullets[bulletCount] = new BulletsRotation(GetLocation(), 2.f, (20 * shotNum));
+				bullets[bulletCount] = new BulletsRotation(GetLocation(), 4.f, (20 * shotNum));
 			}
 		}
 	}
