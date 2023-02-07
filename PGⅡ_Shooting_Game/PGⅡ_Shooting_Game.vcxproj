@@ -167,6 +167,7 @@
     <ClCompile Include="RecoveryItem.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SpherCollider.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="RecoveryItem.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SpherCollider.h" />
+    <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

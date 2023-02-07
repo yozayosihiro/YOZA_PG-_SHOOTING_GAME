@@ -5,6 +5,7 @@
 #include"SceneManager.h"
 #include"GameMain.h"
 #include"KeyManager.h"
+#include"TitleScene.h"
 
 /***********************************************
  * 変数の宣言
@@ -28,24 +29,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	SetGraphMode(1280, 720, 32);       // 画面を大きくする
 	if (DxLib_Init() == -1) return -1; // DXライブラリの初期化処理
 
-	/*タイトル画像データの読み込み*/
-	//if ((g_TitleImage = LoadGraph("images/Title.png")) == -1) return -1;
-	/*ランキング画像データの読み込み*/
-	//if ((g_RankingImage = LoadGraph("images/Ranking.bmp")) == -1) return -1;
-	/*エンド画像データの読み込み*/
-	//if ((g_EndImage = LoadGraph("images/End.bmp")) == -1) return -1;
-	/*ブロック画像データの読み込み*/
-	//if (LoadDivGraph("images/Block.bmp", 8, 8, 1, 40, 8, g_BlockImage) == -1) return -1;
-
-	/*ランキングデータの読み込み*/
-	//if (ranking.ReadRanking() == -1)  return  -1;    
-
 	SetDrawScreen(DX_SCREEN_BACK);	// 描画先画面を裏にする
 
 	SetFontSize(20);		// 文字サイズを設定
 
-	/*シーンマネージャーオブジェクトの作成*/
-	SceneManager SceneMng(dynamic_cast<AbstractScene*>(new GameMainScene()));
+	/*AbstractScene型に戻して、シーンマネージャーオブジェクトの作成*/
+	SceneManager SceneMng(dynamic_cast<AbstractScene*>(new TitleScene()));
 
 	// ゲームループ
 	while (ProcessMessage() == 0) {

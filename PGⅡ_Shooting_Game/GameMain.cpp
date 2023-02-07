@@ -57,6 +57,7 @@ GameMainScene::GameMainScene()
 	/*アイテム初期化*/
 	/*newで領域確保*/
 	//enemy[0] = new Enemy(T_Location{200,0}); /*敵を一体だけ作る*/
+	//
 
 	enemy[0] = new Enemy(T_Location{ 1280 / 2,0 }); /*真ん中に生成  敵を一体だけ作る*/
 

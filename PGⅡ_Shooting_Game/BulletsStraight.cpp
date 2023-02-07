@@ -11,10 +11,10 @@ void BulletsStraight::Update()
 {
 	T_Location NewLocation = GetLocation();
 
-	NewLocation.y += speed.y; /*«*/
+	//NewLocation.y += speed.y; /*«*/
 	
-	//NewLocation.y -= speed.y; /*ª*/
-	//
+	NewLocation.y -= speed.y; /*ª*/
+	
 	
 	SetLocation(NewLocation);
 }

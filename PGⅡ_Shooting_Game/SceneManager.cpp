@@ -24,13 +24,13 @@ AbstractScene* SceneManager::ChangeScene() {
 	//シーンの変更処理呼び出し
 	AbstractScene* NextScene = mScene->ChangeScene();
 
-	//次のシーンが現在シーンと別なら現行
+	//次のシーンが現在シーンと別なら移行
 	if (NextScene != mScene)
 	{
-		delete mScene;
+		delete mScene;      //前のシーンを削除
 
-		mScene = NextScene;
+		mScene = NextScene; //次のシーンに変更
 	}
 
-	return NextScene;
+	return NextScene;       //新しいシーン
 }

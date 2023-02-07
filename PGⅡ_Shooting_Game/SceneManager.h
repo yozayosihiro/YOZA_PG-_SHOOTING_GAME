@@ -17,7 +17,7 @@ public:
 	//デストラクタ
 	~SceneManager() {
 
-		delete mScene;
+		delete mScene; //シーンの削除
 	}
 
 	//描画以外の更新を実装する

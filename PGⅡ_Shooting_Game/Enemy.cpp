@@ -5,38 +5,37 @@
 #include "KeyManager.h"
 #include"BulletsRotation.h"
 
-/*敵：移動・動きの情報*/
-struct MoveInformation 
-{
-	int pattern;               /*方法・パターン*/
-
-	T_Location TargetLocation; /*目的地*/
-
-	int next;                  /*次の(配列)処理*/
-
-	int waitTimeFlame;         /*(待ちなど)時間*/
-
-	int attackPattern;         /*攻撃方法*/
-};
+///*敵：移動・動きの情報*/
+//struct MoveInformation 
+//{
+//	int pattern;               /*方法・パターン*/
+//
+//	T_Location TargetLocation; /*目的地*/
+//
+//	int next;                  /*次の(配列)処理*/
+//
+//	int waitTimeFlame;         /*(待ちなど)時間*/
+//
+//	int attackPattern;         /*攻撃方法*/
+//};
 
 /*敵：移動, 目的地, NEXT, 待ち時間, 攻撃方法の配列*/
-MoveInformation MoveInfo[10] =
-{
-/*{方法,    目的地,   NEXT,  待ち時間,  攻撃方法}; */
-
-	{0,     640, 150,    1,         0,         0}, 
-	{0,  1200.4, 150,    2,         0,         2}, 
-	{1,       0,   0,    3,       300,         1}, 
-	{0,    80.2, 150,    4,         0,         2}, 
-	{1,       0,   0,    1,       300,         1}
-
-	//{640,150,0,0,1,0} ,  /*{X座標,Y座標,パターン,攻撃方法,次の(配列)処理,(待ちなど)時間}*/
-	//{1200.4,150,0,0,2,0},
-	//{0,0,1,0,3,180},
-	//{80.2,150,0,2,4,0},
-	//{0,0,1,1,5,180},
-	//{1200.4,150,0,1,2,0},
-};
+//MoveInformation MoveInfo[10] =
+//{
+////{方法,    目的地,   NEXT,  待ち時間,  攻撃方法};
+//	/*{0,     640, 150,    1,         0,         0}, 
+//	{0,  1200.4, 150,    2,         0,         2}, 
+//	{1,       0,   0,    3,       300,         1}, 
+//	{0,    80.2, 150,    4,         0,         2}, 
+//	{1,       0,   0,    1,       300,         1}*/
+//
+//	//{640,150,0,0,1,0} ,  //{X座標,Y座標,パターン,攻撃方法,次の(配列)処理,(待ちなど)時間}
+//	//{1200.4,150,0,0,2,0},
+//	//{0,0,1,0,3,180},
+//	//{80.2,150,0,2,4,0},
+//	//{0,0,1,1,5,180},
+//	//{1200.4,150,0,1,2,0},
+//};
 
 //struct ENEMY_MOVE
 //{
@@ -69,24 +68,26 @@ MoveInformation MoveInfo[10] =
 //}; 
 
 /*別方法*/
-T_Location loopLocations[3] = /*繰り返し移動用の座標*/
-{
-	{640,150},	  /*移動1*/
-	{1200.4,150}, /*移動2*/
-	{80.2,150},   /*移動3*/
-};
+//T_Location loopLocations[3] = /*繰り返し移動用の座標*/
+//{
+//	//{640,150},	  /*移動1*/
+//	//{1200.4,150}, /*移動2*/
+//	//{80.2,150},   /*移動3*/
+//};
 
-int Next[3] = /*移動番号*/
-{
-	1, /*移動1*/
-	2, /*移動2*/
-	3, /*移動3*/
-};
+/*移動番号*/
+//int Next[3] = 
+//{
+//	//1, /*移動1*/
+//	//2, /*移動2*/
+//	//3, /*移動3*/
+//};
 
-int current = 0; /*処理用番号の変数*/
-int waitCount = 0; /*停滞時間*/
+//int current = 0; /*処理用番号の変数*/
+//int waitCount = 0; /*停滞時間*/
 
-void InputCSV()
+/*敵：移動処理・攻撃の方法、パターンのファイル読み込み*/
+void Enemy::InputCSV()
 {
 	FILE* fp; /*FILE型構造体*/
 
@@ -101,17 +102,17 @@ void InputCSV()
 	}
 	else //ファイルを開いた
 	{
-		char* line[100]; //行
+		char line[100]; //行
 
 		/*fgets(line, 文字数, fp)*/
 		//fgets(line, 100, fp); 
 		//
 
-		for (int i = 0; fgets(line[100], 100, fp) != NULL; i++) {
-			while (fgets(line[100], 100, fp) != NULL) //指定の文字数を取ってくる
-			{
+		for (int i = 0; fgets(line, 100, fp) != NULL; i++) {
+			//while (fgets(line[100], 100, fp) != NULL) //指定の文字数を取ってくる
+			//{
 				sscanf_s(
-						  line[100], //行
+						  line, //行
 
 					"%d, %f, %f, %d, %d, %d",       //(int, float, float, int, int, int)
 
@@ -127,9 +128,10 @@ void InputCSV()
 
 					& MoveInfo[i].attackPattern     /*攻撃方法*/
 				 );
-			}
-			return;
+			//}
+			//	
 		}
+		return;
 	}
 	fclose(fp); /*ファイルを閉じる*/
 }
@@ -197,9 +199,9 @@ void Enemy::Move()
 		{
 			NextLocation.x -= speed.x; /*左移動*/
 
-			if ((NextLocation.x <= loopLocations[current].x) && (loopLocations[current].x <= GetLocation().x)) /*((次のX座標 <= 目的地) && (目的地 <= 今のX座標))*/
+			if ((NextLocation.x <= MoveInfo[current].TargetLocation.x) && (MoveInfo[current].TargetLocation.x <= GetLocation().x)) /*((次のX座標 <= 目的地) && (目的地 <= 今のX座標))*/
 			{
-				NextLocation.x = loopLocations[current].x; /*目的地を飛び超えたとき*/
+				NextLocation.x = MoveInfo[current].TargetLocation.x; /*目的地を飛び超えたとき*/
 			}
 		}
 	}
@@ -375,14 +377,14 @@ void Enemy::Update()
 	       /*(敵の処理情報[処理用番号].攻撃方法 == 1)*/
 			if (MoveInfo[current].attackPattern == 1) 
 			{
-				bullets[bulletCount] = new BulletsStraight(GetLocation(), T_Location{ 0, 2 });
+				bullets[bulletCount] = new BulletsStraight(GetLocation(), T_Location{ 0, -2 }); /*垂直発射*/
 			}
 		   /*(敵の処理情報[処理用番号].攻撃方法 == 2)*/
 			if (MoveInfo[current].attackPattern == 2) 
 			{
 				shotNum++;
 
-				bullets[bulletCount] = new BulletsRotation(GetLocation(), 4.f, (20 * shotNum));
+				bullets[bulletCount] = new BulletsRotation(GetLocation(), 4.f, (20 * shotNum)); /*回転式弾丸発射*/
 			}
 		}
 	}
