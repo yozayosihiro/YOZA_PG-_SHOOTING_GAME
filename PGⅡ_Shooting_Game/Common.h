@@ -17,7 +17,7 @@ enum class GAME_STATE {
     EXIT = 99
 };
 
-struct T_Location {
+struct T_Location { //à íu(float xÅEfloat y)
 
     float x;
     float y;

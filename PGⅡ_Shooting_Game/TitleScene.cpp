@@ -12,13 +12,13 @@ void TitleScene::Update()
 /*ゲームメイン：ゲームメイン：描画に関することを実装する*/
 void TitleScene::Draw() const
 {
-	
+	DrawString(0, 100, "Zキーでスタート",0xfffffff );
  }
 
 /*ゲームメイン：シーンの変更処理*/
 AbstractScene * TitleScene::ChangeScene() 
 {
-	if (KeyManager::OnKeyClicked(KEY_INPUT_A)) /*ボタンを押して*/
+	if (KeyManager::OnKeyClicked(KEY_INPUT_Z)) /*ボタンを押して*/
 	{
 		return dynamic_cast<AbstractScene*>(new GameMainScene()); /*AbstractScene型に戻して、newでGameMainScene()を作成*/
 	}

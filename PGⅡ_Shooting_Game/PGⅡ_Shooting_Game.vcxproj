@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BulletsBase.cpp" />
+    <ClCompile Include="BulletsBounce.cpp" />
     <ClCompile Include="BulletsRotation.cpp" />
     <ClCompile Include="BulletsStraight.cpp" />
     <ClCompile Include="CharaBase.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MouseManager_Non.cpp" />
+    <ClCompile Include="OverScene.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RecoveryItem.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -172,6 +174,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
     <ClInclude Include="BulletsBase.h" />
+    <ClInclude Include="BulletsBounce.h" />
     <ClInclude Include="BulletsRotation.h" />
     <ClInclude Include="BulletsStraight.h" />
     <ClInclude Include="CharaBase.h" />
@@ -183,6 +186,7 @@
     <ClInclude Include="ItemBase.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MouseManager.h" />
+    <ClInclude Include="OverScene.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RecoveryItem.h" />
     <ClInclude Include="SceneManager.h" />

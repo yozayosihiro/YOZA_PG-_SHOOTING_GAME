@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="ヘッダー ファイル">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
@@ -13,114 +9,187 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソースファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ソースファイル\円・中心座標。半径">
+      <UniqueIdentifier>{54c4b913-84f6-451f-8380-d58180a23d31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\シーンマネージャー">
+      <UniqueIdentifier>{955c2c20-68b1-41c5-a6cc-b28cd97bddfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\入力マネージャー">
+      <UniqueIdentifier>{c29cf0ea-467c-4a1f-8b8d-cc1f56bb42f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\タイトル">
+      <UniqueIdentifier>{c6cc4bb2-7ce5-4dcf-a0b3-56c39dc43038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\キャラクター%28プレイヤー、敵%29">
+      <UniqueIdentifier>{f1cbb2f1-1d5b-4446-86f2-f4475d58b1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\キャラクター%28プレイヤー、敵%29\キャラクターBASE">
+      <UniqueIdentifier>{c8bdbd0e-e41d-43cc-9b07-f48dcf9b5ed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\キャラクター%28プレイヤー、敵%29\プレイヤー">
+      <UniqueIdentifier>{f2fb0760-a0a3-4e7f-bb0e-1c133a3a81f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\キャラクター%28プレイヤー、敵%29\敵">
+      <UniqueIdentifier>{4c0d1349-de93-46bb-ab86-b1cf5c73961f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\弾丸%28垂直式、回転式%29">
+      <UniqueIdentifier>{e43fd5cf-a113-442c-9375-3a7a2f4df7f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\弾丸%28垂直式、回転式%29\垂直式弾丸">
+      <UniqueIdentifier>{07bea36e-9add-4171-be55-96bd5af1e30b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\弾丸%28垂直式、回転式%29\回転式弾丸">
+      <UniqueIdentifier>{cf87853c-34a0-4d96-aa8e-c515a94b1b23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\弾丸%28垂直式、回転式%29\弾BASE">
+      <UniqueIdentifier>{f2b3b679-3633-4ddb-9e38-05f988a9a377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\アイテム">
+      <UniqueIdentifier>{13a6a109-ecf1-4b2c-a307-7d3a2f13e877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\アイテム\アイテムBASE">
+      <UniqueIdentifier>{c18b466e-8c38-49c2-b8bc-f44b1b8aa106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\アイテム\回復アイテム">
+      <UniqueIdentifier>{624e16dd-c4e2-4098-8d4e-0e23c0493f9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\NON">
+      <UniqueIdentifier>{6c68e77e-84a1-4d22-85eb-5b41e10f1f72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ゲーム・メイン">
+      <UniqueIdentifier>{40dedcfc-006c-47b7-96df-1492bd7d5752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\弾丸%28垂直式、回転式%29\跳ね返り式弾丸">
+      <UniqueIdentifier>{5de88084-5ae1-4651-b8ff-4570db4ab50d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ゲーム・オーバー">
+      <UniqueIdentifier>{1127863f-6c3d-4796-8c87-7e7db912c1fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SpherCollider.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="CharaBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletsBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletsStraight.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseManager_Non.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemBase.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="enum_ItemType.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="RecoveryItem.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="BulletsBase.cpp">
+      <Filter>ソースファイル\弾丸%28垂直式、回転式%29\弾BASE</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBulletsStraight_Non.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="BulletsStraight.cpp">
+      <Filter>ソースファイル\弾丸%28垂直式、回転式%29\垂直式弾丸</Filter>
     </ClCompile>
     <ClCompile Include="BulletsRotation.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソースファイル\弾丸%28垂直式、回転式%29\回転式弾丸</Filter>
+    </ClCompile>
+    <ClCompile Include="CharaBase.cpp">
+      <Filter>ソースファイル\キャラクター%28プレイヤー、敵%29\キャラクターBASE</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソースファイル\キャラクター%28プレイヤー、敵%29\プレイヤー</Filter>
+    </ClCompile>
+    <ClCompile Include="SpherCollider.cpp">
+      <Filter>ソースファイル\円・中心座標。半径</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソースファイル\キャラクター%28プレイヤー、敵%29\敵</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBase.cpp">
+      <Filter>ソースファイル\アイテム\アイテムBASE</Filter>
+    </ClCompile>
+    <ClCompile Include="RecoveryItem.cpp">
+      <Filter>ソースファイル\アイテム\回復アイテム</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMain.cpp">
+      <Filter>ソースファイル\ゲーム・メイン</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>ソースファイル\シーンマネージャー</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>ソースファイル\入力マネージャー</Filter>
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソースファイル\タイトル</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBulletsStraight_Non.cpp">
+      <Filter>ソースファイル\NON</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseManager_Non.cpp">
+      <Filter>ソースファイル\NON</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletsBounce.cpp">
+      <Filter>ソースファイル\弾丸%28垂直式、回転式%29\跳ね返り式弾丸</Filter>
+    </ClCompile>
+    <ClCompile Include="OverScene.cpp">
+      <Filter>ソースファイル\ゲーム・オーバー</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Common.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SpherCollider.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CharaBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletsBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletsStraight.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="enum_ItemType.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="RecoveryItem.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="BulletsBase.h">
+      <Filter>ソースファイル\弾丸%28垂直式、回転式%29\弾BASE</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBulletsStraight.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="BulletsStraight.h">
+      <Filter>ソースファイル\弾丸%28垂直式、回転式%29\垂直式弾丸</Filter>
     </ClInclude>
     <ClInclude Include="BulletsRotation.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソースファイル\弾丸%28垂直式、回転式%29\回転式弾丸</Filter>
+    </ClInclude>
+    <ClInclude Include="CharaBase.h">
+      <Filter>ソースファイル\キャラクター%28プレイヤー、敵%29\キャラクターBASE</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ソースファイル\キャラクター%28プレイヤー、敵%29\プレイヤー</Filter>
+    </ClInclude>
+    <ClInclude Include="SpherCollider.h">
+      <Filter>ソースファイル\円・中心座標。半径</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ソースファイル\キャラクター%28プレイヤー、敵%29\敵</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBase.h">
+      <Filter>ソースファイル\アイテム\アイテムBASE</Filter>
+    </ClInclude>
+    <ClInclude Include="RecoveryItem.h">
+      <Filter>ソースファイル\アイテム\回復アイテム</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMain.h">
+      <Filter>ソースファイル\ゲーム・メイン</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>ソースファイル\シーンマネージャー</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractScene.h">
+      <Filter>ソースファイル\シーンマネージャー</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>ソースファイル\入力マネージャー</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソースファイル\タイトル</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBulletsStraight.h">
+      <Filter>ソースファイル\NON</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseManager.h">
+      <Filter>ソースファイル\NON</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletsBounce.h">
+      <Filter>ソースファイル\弾丸%28垂直式、回転式%29\跳ね返り式弾丸</Filter>
+    </ClInclude>
+    <ClInclude Include="OverScene.h">
+      <Filter>ソースファイル\ゲーム・オーバー</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

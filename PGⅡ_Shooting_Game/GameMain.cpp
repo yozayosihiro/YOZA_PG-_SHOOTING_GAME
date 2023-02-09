@@ -1,5 +1,6 @@
 #include"GameMain.h"
 #include"RecoveryItem.h"
+#include"OverScene.h"
 
 /*描画以外の更新を実行する*/
 //AbstractScene* GameMainScene::Update() {
@@ -60,6 +61,7 @@ GameMainScene::GameMainScene()
 	//
 
 	enemy[0] = new Enemy(T_Location{ 1280 / 2,0 }); /*真ん中に生成  敵を一体だけ作る*/
+	enemy[1] = new Enemy(T_Location{ 1280 / 4,0 }); /*真ん中に生成  敵,二体目*/
 
 	item = new ItemBase * [10];
 
@@ -329,7 +331,11 @@ void GameMainScene::Draw() const {
 }
 
 /*ゲームメイン：シーンの変更処理*/
-AbstractScene* GameMainScene::ChangeScene() {
-
+AbstractScene* GameMainScene::ChangeScene() 
+{
+	if (player->LifeCheck()) //プレイヤーのHPが0だったら
+	{
+		return dynamic_cast<AbstractScene*>(new OverScene()); /*AbstractScene型に戻して、newでOverScene()を作成*/
+	}
 	return this;
 }
